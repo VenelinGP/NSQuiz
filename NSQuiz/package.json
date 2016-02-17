@@ -1,0 +1,11 @@
+{
+	"nativescript": {
+		"id": "org.nativescript.NSQuiz",
+		"tns-android": {
+			"version": "1.6.0"
+		}
+	},
+	"dependencies": {
+		"tns-core-modules": "1.6.0"
+	}
+}
