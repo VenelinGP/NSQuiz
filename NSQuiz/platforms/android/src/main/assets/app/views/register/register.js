@@ -9,7 +9,7 @@ var password;
 var signUpButton;
 
 
-exports.loaded = function(args) {
+exports.registerView = function(args) {
     var page = args.object;
     page.bindingContext = user;
 

@@ -1,7 +1,7 @@
-<page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="loadSignInView" >
-  <page.actionBar>
-        <action-bar title="Sign in" />
-    </page.actionBar>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="loadSignInView" >
+  <Page.actionBar>
+        <ActionBar title="Sign in" />
+    </Page.actionBar>
     <ScrollView>
     <StackLayout id="layout">
         <image src="res://logo" stretch="none" horizontalAlignment="center" />
@@ -15,4 +15,4 @@
         </GridLayout> 
     </StackLayout>
     </ScrollView>
-</page>
+</Page>

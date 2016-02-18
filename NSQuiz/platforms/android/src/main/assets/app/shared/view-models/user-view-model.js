@@ -60,7 +60,9 @@ function User(info) {
 	};
 
 	viewModel.isValidEmail = function() {
+
 		var email = this.get("email");
+		console.log("email: " + email);
 		return validator.validate(email);
 	};
 
