@@ -1,23 +1,23 @@
-<page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" >
+<page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="loadSignUpView" >
   <page.actionBar>
         <action-bar title="Sign in" />
     </page.actionBar>
-    <scroll-view>
-    <stack-layout id="layout">
+    <ScrollView>
+    <StackLayout id="layout">
         <image src="res://logo" stretch="none" horizontalAlignment="center" />
-        <grid-layout rows="auto, auto, auto, auto, auto" style.verticalAlignment="midle">
+        <GridLayout rows="auto, auto, auto, auto, auto" style.verticalAlignment="midle">
 
-            <text-field id="name" text="{{ name }}" hint="Full Name" returnKeyType="next" returnPress="focusEmail" row="0"/>
-            <text-field id="email" text="{{ email }}" hint="Email Address" keyboardType="email" returnKeyType="next" returnPress="focusPassword" autocorrect="false" autocapitalizationType="none" row="1" />
-            <text-field id="password" secure="true" text="{{ password }}" hint="Password" returnKeyType="done" returnPress="signIn" row="2" />
+            <TextField id="name" text="{{ name }}" hint="Full Name" returnKeyType="next" returnPress="focusEmail" row="0"/>
+            <TextField id="email" text="{{ email }}" hint="Email Address" keyboardType="email" returnKeyType="next" returnPress="focusPassword" autocorrect="false" autocapitalizationType="none" row="1" />
+            <TextField id="password" secure="true" text="{{ password }}" hint="Password" returnKeyType="done" returnPress="signIn" row="2" />
             <activity-indicator busy="{{ authenticating }}" rowSpan="2" />
-            <button id="signUpButton" row="3" text="Sign Up" width="100"/>
+            <Button  text="Sign Up" id="signUpButton" tap="signUp" row="3"/>
             <Label id="result" text=" " textWrap="true" row="4"/>
 
-        </grid-layout> 
+        </GridLayout> 
         
         
-    </stack-layout>
-    </scroll-view>
+    </StackLayout>
+    </ScrollView>
 </page>
 textField.android.setHintTextColor(android.graphics.Color.parseColor("#FFFFFF"));
