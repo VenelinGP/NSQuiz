@@ -1,4 +1,6 @@
-﻿page {
+﻿@import { url('~/styles/platform.css') };
+
+page {
 	background-color: #25575E;
 	color: #FA0;
 	font-size: 17;
@@ -7,6 +9,7 @@
 action-bar {
 	color: #FA0;
 }
+
 action-bar, .main-color {
 	background-color: #25575E;
 }
@@ -25,17 +28,17 @@ image {
 	margin-bottom: 80;
 }
 
-.title {
-	background-color: #000;
+.link {
+		background-color: transparent;
 }
 
-
 button {
-	margin: 10;
+	margin: 20;
 	padding: 10;
-	width: 100;
+	width: 200;
 	color: #FA0;
-    font-size: 16;
+    font-size: 14;
+    font-weight: bold;
     horizontal-align: center;
 }
 

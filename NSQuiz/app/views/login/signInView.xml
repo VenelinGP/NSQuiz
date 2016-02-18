@@ -1,0 +1,18 @@
+<page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="loadSignInView" >
+  <page.actionBar>
+        <action-bar title="Sign in" />
+    </page.actionBar>
+    <ScrollView>
+    <StackLayout id="layout">
+        <image src="res://logo" stretch="none" horizontalAlignment="center" />
+        <GridLayout rows="auto, auto, auto, auto, auto" style.verticalAlignment="midle">
+            <TextField id="name" text="{{ name }}" hint="Full Name" returnKeyType="next" returnPress="focusEmail" row="0"/>
+           <!--  <TextField id="email" text="{{ email }}" hint="Email Address" keyboardType="email" returnKeyType="next" returnPress="focusPassword" autocorrect="false" autocapitalizationType="none" row="1" /> -->
+            <TextField id="password" secure="true" text="{{ password }}" hint="Password" returnKeyType="done" returnPress="signIn" row="2" />
+            <activity-indicator busy="{{ authenticating }}" rowSpan="2" />
+            <Button  text="Sign In" id="signInButton" tap="signIn" row="3"/>
+            <Button text="Register for Quiz" tap="register" class="link" row="4"/>
+        </GridLayout> 
+    </StackLayout>
+    </ScrollView>
+</page>

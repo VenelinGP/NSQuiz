@@ -1,23 +1,18 @@
-<page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="loadSignUpView" >
+<page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="registerView" >
   <page.actionBar>
-        <action-bar title="Sign in" />
+        <action-bar title="Sign up" />
     </page.actionBar>
     <ScrollView>
-    <StackLayout id="layout">
+    <StackLayout>
         <image src="res://logo" stretch="none" horizontalAlignment="center" />
-        <GridLayout rows="auto, auto, auto, auto, auto" style.verticalAlignment="midle">
 
+        <GridLayout rows="auto, auto, auto, auto, auto" style.verticalAlignment="midle">
             <TextField id="name" text="{{ name }}" hint="Full Name" returnKeyType="next" returnPress="focusEmail" row="0"/>
             <TextField id="email" text="{{ email }}" hint="Email Address" keyboardType="email" returnKeyType="next" returnPress="focusPassword" autocorrect="false" autocapitalizationType="none" row="1" />
             <TextField id="password" secure="true" text="{{ password }}" hint="Password" returnKeyType="done" returnPress="signIn" row="2" />
             <activity-indicator busy="{{ authenticating }}" rowSpan="2" />
-            <Button  text="Sign Up" id="signUpButton" tap="signUp" row="3"/>
-            <Label id="result" text=" " textWrap="true" row="4"/>
-
+            <Button  text="Sign Up" id="signUpButton" tap="register" row="3"/>
         </GridLayout> 
-        
-        
     </StackLayout>
     </ScrollView>
 </page>
-textField.android.setHintTextColor(android.graphics.Color.parseColor("#FFFFFF"));
