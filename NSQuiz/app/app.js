@@ -1,2 +1,4 @@
 var application = require("application");
-application.start({ moduleName: "main-page" });
+application.cssFile = "./styles/app.css";
+application.mainModule = "./views/login/signUpView";
+application.start();
