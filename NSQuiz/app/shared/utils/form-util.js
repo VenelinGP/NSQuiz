@@ -1,3 +1,4 @@
+"use strict";
 var gesturesModule = require("ui/gestures");
 
 exports.hideKeyboardOnBlur = function(page, views) {

@@ -1,3 +1,4 @@
+"use strict";
 var dialogsModule = require("ui/dialogs");
 var formUtil = require("../../shared/utils/form-util");
 var navigation = require("../../shared/navigation");

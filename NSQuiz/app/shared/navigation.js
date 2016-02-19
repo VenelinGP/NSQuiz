@@ -1,9 +1,10 @@
+"use strict";
 var config = require("./config");
 var frameModule = require("ui/frame");
 
 module.exports = {
 	goToLoginPage: function() {
-		frameModule.topmost().navigate("views/login/login");
+		frameModule.topmost().navigate("views/login/signInView");
 	},
 	goToRegisterPage: function() {
 		frameModule.topmost().navigate("views/register/register");
@@ -26,6 +27,6 @@ module.exports = {
 		});
 	},
 	startingPage: function() {
-		return config.token ? "views/list/list" : "views/login/login";
+		return config.token ? "views/list/list" : "views/login/signInView";
 	}
 };

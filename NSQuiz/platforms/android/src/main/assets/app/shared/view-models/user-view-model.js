@@ -1,3 +1,4 @@
+"use strict";
 var config = require("../../shared/config");
 var Observable = require("data/observable").Observable;
 var validator = require("email-validator");

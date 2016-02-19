@@ -1,3 +1,4 @@
+"use strict";
 var view = require("ui/core/view");
 var frameModule = require("ui/frame");
 // var buttonModule = require("ui/button");
@@ -33,7 +34,7 @@ var pageModules = {
         // }
         // });
     }
-}
+};
 
 // exports.loadSignInView = pageModules.onLoad;
 exports.signIn = function() {
