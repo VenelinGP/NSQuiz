@@ -7,6 +7,7 @@ function User(info) {
 
 	// You can add properties to observables on creation
 	var viewModel = new Observable({
+		username: info.username || "",
 		email: info.email || "",
 		password: info.password || ""
 	});
@@ -15,7 +16,7 @@ function User(info) {
 		return fetch(config.apiUrl + "oauth/token", {
 			method: "POST",
 			body: JSON.stringify({
-				username: viewModel.get("email"),
+				username: viewModel.get("username"),
 				password: viewModel.get("password"),
 				grant_type: "password"
 			}),
@@ -35,7 +36,7 @@ function User(info) {
 		return fetch(config.apiUrl + "Users", {
 			method: "POST",
 			body: JSON.stringify({
-				Username: viewModel.get("email"),
+				Username: viewModel.get("username"),
 				Email: viewModel.get("email"),
 				Password: viewModel.get("password")
 			}),
@@ -59,8 +60,16 @@ function User(info) {
 		.then(handleErrors);
 	};
 
-	viewModel.isValidEmail = function() {
+	viewModel.isValidUsername = function () {
+		var name = this.get("username");
+		console.log(name);
+		if (name.length < 4) {
+			return false;
+		}
+		return true;
+	}
 
+	viewModel.isValidEmail = function() {
 		var email = this.get("email");
 		console.log("email: " + email);
 		return validator.validate(email);

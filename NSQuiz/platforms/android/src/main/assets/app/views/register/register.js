@@ -2,20 +2,24 @@ var dialogsModule = require("ui/dialogs");
 var formUtil = require("../../shared/utils/form-util");
 var navigation = require("../../shared/navigation");
 var UserViewModel = require("../../shared/view-models/user-view-model");
+var Toast = require("nativescript-toast");
 
 var user = new UserViewModel({ authenticating: false });
+var username;
 var email;
 var password;
 var signUpButton;
 
 
+
 exports.registerView = function(args) {
     var page = args.object;
     page.bindingContext = user;
-
+    user.set("username", "");
     user.set("email", "");
     user.set("password", "");
 
+    username = page.getViewById("username");
     email = page.getViewById("email");
     password = page.getViewById("password");
     signUpButton = page.getViewById("sign-up-button");
@@ -27,12 +31,14 @@ exports.focusPassword = function() {
 };
 
 function disableForm() {
+    username.isEnabled = false;
     email.isEnabled = false;
     password.isEnabled = false;
     signUpButton.isEnabled = false;
     user.set("authenticating", true);
 }
 function enableForm() {
+    username.isEnabled = true;
     email.isEnabled = true;
     password.isEnabled = true;
     signUpButton.isEnabled = true;
@@ -56,12 +62,14 @@ function completeRegistration() {
 }
 
 exports.register = function() {
-    if (user.isValidEmail()) {
-        completeRegistration();
-    } else {
-        dialogsModule.alert({
-            message: "Enter a valid email address.",
-            okButtonText: "OK"
-        });
+    if (!user.isValidUsername()) {
+        Toast.makeText("The username must be longer than 3 characters!").show();
+    }
+    else {
+        if (user.isValidEmail()) {
+            completeRegistration();
+        } else {
+            Toast.makeText("Enter a valid email address.", "long").show();
+        }
     }
 };
