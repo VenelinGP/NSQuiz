@@ -62,17 +62,24 @@ function User(info) {
 
 	viewModel.isValidUsername = function () {
 		var name = this.get("username");
-		console.log(name);
 		if (name.length < 4) {
 			return false;
 		}
 		return true;
-	}
+	};
 
 	viewModel.isValidEmail = function() {
 		var email = this.get("email");
-		console.log("email: " + email);
 		return validator.validate(email);
+	};
+
+	viewModel.isValidPassword = function () {
+		var password = this.get("password");
+		console.log(password);
+		if (password.length < 7) {
+			return false;
+		}
+		return true;
 	};
 
 	return viewModel;

@@ -66,10 +66,17 @@ exports.register = function() {
         Toast.makeText("The username must be longer than 3 characters!").show();
     }
     else {
-        if (user.isValidEmail()) {
-            completeRegistration();
-        } else {
+        if (!user.isValidEmail()) {
             Toast.makeText("Enter a valid email address.", "long").show();
+            
+        } 
+        else {
+            if(!user.isValidPassword()) {
+                Toast.makeText("The password must be longer than 6 characters!").show();
+            }
+            else{
+                completeRegistration();
+            }
         }
     }
 };
