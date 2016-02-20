@@ -86,8 +86,9 @@ function login(user) {
 
 function currentUserInfo() {
     return new Promise(function (resolve, reject) {
-        http.getJSON({
+        http.request({
             url: BASE_URL + 'api/Account/UserInfo',
+            method: 'GET',
             headers: applyAuthorisationHeader()
         })
             .then(function (response) {
@@ -106,7 +107,10 @@ function currentUserInfo() {
 
 function getCategories() {
     return new Promise(function (resolve, reject) {
-        http.getJSON(BASE_URL + 'api/quizzes/categories')
+        http.request({
+            url: BASE_URL + 'api/quizzes/categories',
+            method: 'GET'
+        })
             .then(function (response) {
                 var content = response.content.toJSON();
                 logResponse(response, content);
@@ -126,7 +130,10 @@ function getQuizzes(page) {
     }
 
     return new Promise(function (resolve, reject) {
-        http.getJSON(BASE_URL + '/api/quizzes?page=' + page)
+        http.request({
+            url: BASE_URL + '/api/quizzes?page=' + page,
+            method: 'GET'
+        })
             .then(function (response) {
                 var content = response.content.toJSON();
                 logResponse(response, content);
