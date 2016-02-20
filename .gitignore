@@ -8,9 +8,13 @@
 # Java class files
 *.class
 
+# Packages and downloaded modules
+
+
 # Generated files
 bin/
 gen/
+
 
 # Gradle files
 .gradle/
