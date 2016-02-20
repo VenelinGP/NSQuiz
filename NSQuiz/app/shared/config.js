@@ -1,18 +1,38 @@
 "use strict";
-var applicationSettingsModule = require("application-settings");
+var appSettings = require("application-settings");
+
+var currentUser = {};
 
 var configObject = {
-	apiUrl: "https://api.everlive.com/v1/GWfRtXi1Lwt4jcqK/",
+	apiUrl: "http://superquiz.apphb.com/",
 	invalidateToken: function() {
 		this.token = "";
 	}
 };
-Object.defineProperty(configObject, "token", {
-	get: function() {
-		return applicationSettingsModule.getString("token");
+
+Object.defineProperties(configObject, {
+	token: {
+		get: function() {
+			return appSettings.getString("token");
+		},
+		set: function(token) {
+			return appSettings.setString("token", token);
+		}
 	},
-	set: function(token) {
-		return applicationSettingsModule.setString("token", token);
+
+	currentUser: {
+		get: function() {
+			return currentUser;
+		},
+		set: function(user) {
+			currentUser = user;
+		}
+	},
+
+	isAuthenticated: {
+		get: function() {
+			return Object.getOwnPropertyNames(currentUser).length !== 0;
+		}
 	}
 });
 
