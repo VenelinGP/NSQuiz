@@ -5,21 +5,10 @@
 			"version": "1.6.1"
 		}
 	},
-	"dependencies": {
-		"email-validator": "^1.0.4",
-		"nativescript-sqlite": "^1.0.8",
-		"nativescript-toast": "^1.2.0",
-		"tns-core-modules": "1.6.0",
-		"tns-core-modules-widgets": "^1.6.1"
-	},
 	"name": "ns-quiz",
-	"main": "app/app.js",
+	"main": "app.js",
 	"version": "1.0.0",
 	"description": "nativescript application",
-	"devDependencies": {},
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/VenelinGP/NSQuiz.git"
@@ -30,4 +19,7 @@
 		"url": "https://github.com/VenelinGP/NSQuiz/issues"
 	},
 	"homepage": "https://github.com/VenelinGP/NSQuiz#readme",
+	"android": {
+		"v8Flags": "--expose_gc"
+	}
 }
