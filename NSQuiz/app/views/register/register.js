@@ -11,14 +11,12 @@ var email;
 var password;
 var signUpButton;
 
-
-
 exports.registerView = function(args) {
     var page = args.object;
     page.bindingContext = user;
-    user.set("username", "");
-    user.set("email", "");
-    user.set("password", "");
+    user.set("username", "proba");
+    user.set("email", "proba@yahoo.com");
+    user.set("password", "123123123");
 
     username = page.getViewById("username");
     email = page.getViewById("email");
