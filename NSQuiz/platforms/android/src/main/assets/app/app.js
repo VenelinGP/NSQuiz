@@ -1,5 +1,5 @@
 "use strict";
 var application = require("application");
 application.cssFile = "./styles/app.css";
-application.mainModule = "./views/login/signInView";
+application.mainModule = "./views/list/list";
 application.start();
