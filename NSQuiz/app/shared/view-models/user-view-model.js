@@ -1,6 +1,7 @@
 "use strict";
 var Observable = require("data/observable").Observable;
 var validator = require("email-validator");
+var Toast = require("nativescript-toast");
 
 var webApi = require("../../shared/data/web-api-service");
 
@@ -68,11 +69,22 @@ function User(info) {
     viewModel.isValidPassword = function () {
         var password = this.get("password");
         console.log(password);
-        if (password.length < 7) {
+        return password > 6;
+    };
+
+    viewModel.isValid = function () {
+        if (!this.isValidUsername()) {
+            Toast.makeText("The username must be longer than 3 characters!").show();
             return false;
         }
+
+        if (!this.isValidPassword()) {
+            Toast.makeText("The password must be longer than 6 characters!").show();
+            return false;
+        }
+
         return true;
-    };
+    }
 
     return viewModel;
 }

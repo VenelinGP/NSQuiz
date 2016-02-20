@@ -41,6 +41,7 @@ function register(user) {
                     var content = response.content.toJSON();
                     logResponse(response, content);
                 } else {
+                    logResponse(response);
                     resolve();
                 }
             })

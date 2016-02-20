@@ -1,6 +1,7 @@
 "use strict";
 var view = require("ui/core/view");
 var frameModule = require("ui/frame");
+var UserViewModel = require("../../shared/view-models/user-view-model");
 // var buttonModule = require("ui/button");
 // var observable = require("data/observable");
 
