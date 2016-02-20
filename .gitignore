@@ -8,7 +8,11 @@
 # Java class files
 *.class
 
+<<<<<<< HEAD
 # Packages and downloaded modules
+=======
+# Packages and Modules
+>>>>>>> authentication
 node_modules/
 
 # Generated files

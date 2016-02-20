@@ -13,3 +13,13 @@ The application allows the user to connect to a system for creating, rating and 
 * Quiz Result - Wrong / Correct Answers
 * Basic Quiz Statistics for other users (like total quizzes taken, created etc...)
 * Storing Information with SQLite for ofline usage
+
+## To Install
+
+Run 
+```
+tns prepare android
+tns build android
+tns emulate android --geny "emulator name"
+tns livesync android --watch --emulator
+```
