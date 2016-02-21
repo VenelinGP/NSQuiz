@@ -8,7 +8,6 @@ var http = require("http");
 var fetchModule = require("fetch");
 
 var page;
-
 var quizzesList = new QuizzesListViewModel([]);
 var pageData = new Observable({
     quizzesList: quizzesList

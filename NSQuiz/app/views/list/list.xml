@@ -1,21 +1,21 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="loaded">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="loaded" >
     <GridLayout>
 <!--         <Button text="GET" tap="getRequest" /> -->
 		<ListView items="{{ quizzesList }}" itemLoading="onItemLoading" itemTap="onItemTap">
 			<ListView.itemTemplate>
-				<!--3 row 2 columns-->
-				<GridLayout columns="auto, 1*" rows="auto, auto, auto" style.backgroundColor="lightgray" tap="{{onItemTap}}">
+				<!--2 row 4 columns-->
+				<GridLayout columns="auto, 1*, auto, 1*" rows="auto, auto" style.backgroundColor="lightgray" tap="{{onItemTap}}">
 
 					<!--Wont Ids get repeated?-->
 
-					<Label text="Title:" row="0" col="0" />
-					<Label text= "{{ title }}" id="title" row="0" col="1" />
+					<Label text="Quiz:" row="0" col="0" class="titleLabel"/>
+					<Label text= "{{ title }}" id="title" row="0" col="1" colSpan="3" class="title"/>
 
-					<Label text="Category:" row="1" col="0" />
-					<Label text= "{{ category }}" id="category" row="1" col="1" />
+					<Label text="Category:" row="1" col="0" class="contentLabel"/>
+					<Label text= "{{ category }}" id="category" row="1" col="1"  class="content"/>
 
-					<Label text="Created By:" row="2" col="0" />
-					<Label text= "{{ createdBy }}" id="createdBy" row="2" col="1" />
+					<Label text="Created By:" row="1" col="2" class="contentLabel" />
+					<Label text= "{{ createdBy }}" id="createdBy" row="1" col="3" class="content"/>
 				</GridLayout>
 
 
