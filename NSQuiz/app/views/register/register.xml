@@ -6,13 +6,12 @@
     <ScrollView>
     <StackLayout>
         <image src="res://logo" stretch="none" horizontalAlignment="center" />
+        <activity-indicator busy="{{ authenticating }}"/>
 
         <GridLayout rows="auto, auto, auto, auto, auto" style.verticalAlignment="midle">
             <TextField id="username" text="{{ username }}" hint="Username" returnKeyType="next" returnPress="focusEmail" row="0"/>
-            <TextField id="email" text="{{ email }}" hint="Email Address" keyboardType="email" returnKeyType="next" returnPress="focusPassword" autocorrect="false" autocapitalizationType="none" row="1" />
-            <TextField id="password" secure="true" text="{{ password }}" hint="Password" returnKeyType="done" returnPress="signIn" row="2" />
-            <activity-indicator busy="{{ authenticating }}" rowSpan="2" />
-            <Button  text="Sign Up" id="sign-up-button" tap="register" row="3"/>
+            <TextField id="password" secure="true" text="{{ password }}" hint="Password" returnKeyType="done" returnPress="signIn" row="1" />
+            <Button  text="Sign Up" id="sign-up-button" tap="register" row="2"/>
         </GridLayout> 
     </StackLayout>
     </ScrollView>

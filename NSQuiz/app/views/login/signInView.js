@@ -1,48 +1,70 @@
 "use strict";
-var view = require("ui/core/view");
-var frameModule = require("ui/frame");
+var dialogsModule = require("ui/dialogs");
+var navigation = require("../../shared/navigation");
+var formUtil = require("../../shared/utils/form-util").init();
 var UserViewModel = require("../../shared/view-models/user-view-model");
-// var buttonModule = require("ui/button");
-// var observable = require("data/observable");
+var Toast = require("nativescript-toast");
 
-var pageModules = {
-        onLoad: function (args) {
+var user = new UserViewModel({authenticating: false});
 
-       
-        var page = args.object;
-
-        var nameTextField = view.getViewById(page, "name");
-        var emailTextField = view.getViewById(page, "email");
-        var passwordTextField = view.getViewById(page, "password");
-        var signInButton = view.getViewById(page, "signInButton");
-        var options = {
-            sourceProperty: "buttonTitle",
-            targetProperty: "text"
-        };
-        // signInButton.bind(options, model)
-
-        // signInButton.on(buttonModule.Button.tapEvent, function () {
-
-        //     var result = "";
-
-        //     if(nameTextField.text === "" || emailTextField.text === "" || passwordTextField.text === ""){
-        //         result = "Error: All fields required";
-        //         console.log(result);
-        //     }
-        //     else{
-        //         result = "Success!!!\nName: " + nameTextField.text + "\nEmail:" + emailTextField.text + "\nPassword: " + passwordTextField.text;
-        //         console.log(result);
-        // }
-        // });
+var viewObject = {
+    registerView: registerView,
+    signIn: signIn,
+    register: function () {
+        navigation.goToRegisterPage()
     }
 };
 
-// exports.loadSignInView = pageModules.onLoad;
-exports.signIn = function() {
-    alert("Signing in");
-};
+module.exports = viewObject;
 
-exports.register = function() {
-    var topmost = frameModule.topmost();
-    topmost.navigate("views/register/register");
-};
+function registerView(args) {
+    var page = args.object;
+    page.bindingContext = user;
+    user.set("username", "proba");
+    user.set("password", "123123123");
+
+    formUtil.form.username = page.getViewById("username");
+    formUtil.form.password = page.getViewById("password");
+    formUtil.form.signInButton = page.getViewById("sign-in-button");
+    formUtil.hideKeyboardOnBlur(page, [formUtil.form.username, formUtil.form.password]);
+}
+
+function signIn() {
+    if (!formUtil.isValid()) {
+        return;
+    }
+
+    disableForm();
+
+    user.login()
+        .then(function () {
+            Toast.makeText("Welcome back " + user.get("username")).show();
+            // Todo: navigate...
+        })
+        .catch(function (err) {
+            console.log(JSON.stringify(err));
+            var message = err.message || err.error;
+
+            if (err.content && err.content.error_description) {
+                message = err.content.error_description;
+            }
+
+            dialogsModule
+                .alert({
+                    message: message,
+                    okButtonText: "OK"
+                });
+        })
+        .then(enableForm);
+}
+
+function disableForm() {
+    formUtil.toggleForm(false);
+    user.set("authenticating", true);
+}
+
+function enableForm() {
+    formUtil.toggleForm(true);
+    user.set("authenticating", false);
+}
+

@@ -2,10 +2,9 @@
 var dialogsModule = require("ui/dialogs");
 var navigation = require("../../shared/navigation");
 var UserViewModel = require("../../shared/view-models/user-view-model");
-var formUtil = require("../../shared/utils/form-util");
+var formUtil = require("../../shared/utils/form-util").init();
 
 var user = new UserViewModel({authenticating: false});
-var form = {};
 
 var viewObject = {
     registerView: registerView,
@@ -23,28 +22,16 @@ function registerView(args) {
     var page = args.object;
     page.bindingContext = user;
     user.set("username", "proba");
-    user.set("email", "proba@yahoo.com");
     user.set("password", "123123123");
 
-    form.username = page.getViewById("username");
-    form.email = page.getViewById("email");
-    form.password = page.getViewById("password");
-    form.signUpButton = page.getViewById("sign-up-button");
-    formUtil.hideKeyboardOnBlur(page, [form.email, form.password]);
-}
-
-function disableForm(form) {
-    formUtil.toggleForm(form, false);
-    user.set("authenticating", true);
-}
-
-function enableForm(form) {
-    formUtil.toggleForm(form, true);
-    user.set("authenticating", false);
+    formUtil.form.username = page.getViewById("username");
+    formUtil.form.password = page.getViewById("password");
+    formUtil.form.signUpButton = page.getViewById("sign-up-button");
+    formUtil.hideKeyboardOnBlur(page, [formUtil.form.username, formUtil.form.password]);
 }
 
 function register() {
-    if (!user.isValid(form)) {
+    if (!formUtil.isValid()) {
         return;
     }
 
@@ -66,3 +53,14 @@ function register() {
         })
         .then(enableForm);
 }
+
+function disableForm() {
+    formUtil.toggleForm(false);
+    user.set("authenticating", true);
+}
+
+function enableForm() {
+    formUtil.toggleForm(true);
+    user.set("authenticating", false);
+}
+
