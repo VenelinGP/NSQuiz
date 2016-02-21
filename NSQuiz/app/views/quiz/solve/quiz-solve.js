@@ -1,6 +1,6 @@
 "use strict";
 
-var errorHandler = require('../../shared/utils/error-handler');
+var errorHandler = require('../../../shared/utils/error-handler');
 var quiz = {};
 
 function pageLoaded(args) {

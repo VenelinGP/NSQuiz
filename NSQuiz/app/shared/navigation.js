@@ -12,15 +12,15 @@ module.exports = {
 	goToPasswordPage: function() {
 		frameModule.topmost().navigate("views/password/password");
 	},
-	goToListPage: function() {
+	goToQuizListPage: function() {
 		frameModule.topmost().navigate({
-			moduleName: "views/list/list",
+			moduleName: "views/quiz/list/quiz-list",
 			clearHistory: true
 		});
 	},
 	goToSolveQuiz: function(quiz) {
 		frameModule.topmost().navigate({
-			moduleName: "views/quizList/quizList",
+			moduleName: "views/quiz/solve/quiz-solve",
 			context: quiz
 		});
 	},
@@ -33,6 +33,8 @@ module.exports = {
 		});
 	},
 	startingPage: function() {
-		return config.token ? "views/list/list" : "views/login/signInView";
+		return config.token
+			? "views/quiz/list/quiz-list"
+			: "views/login/signInView";
 	}
 };
