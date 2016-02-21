@@ -4,8 +4,12 @@ var dialogsModule = require("ui/dialogs");
 var config = require('./shared/config');
 var webApi = require('./shared/data/web-api-service');
 
+var database = require("./shared/data/sqlite-service");
+
 application.cssFile = "./styles/app.css";
-application.mainModule = "views/quiz/list/quiz-list";
+
+// application.mainModule = "./views/login/signInView";
+application.mainModule = "./views/quiz/list/quiz-list";
 
 application.on(application.launchEvent, function(args) {
     //config.invalidateToken();
@@ -22,3 +26,4 @@ application.on(application.uncaughtErrorEvent, function (args) {
 });
 
 application.start();
+database.initializeSQLite();
