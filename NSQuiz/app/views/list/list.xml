@@ -3,7 +3,24 @@
 <!--         <Button text="GET" tap="getRequest" /> -->
 		<ListView items="{{ quizzesList }}" itemLoading="onItemLoading" itemTap="onItemTap">
 			<ListView.itemTemplate>
-				<Label text= "{{ id, title }}" id="title"  horizontalAlignment="center" verticalAlignment="center"/>
+				<!--3 row 2 columns-->
+				<GridLayout columns="auto, 1*"
+							rows="auto, auto, auto"
+							style.backgroundColor="lightgray" >
+
+					<!--Wont Ids get repeated?-->
+
+					<Label text="Title:" row="0" col="0" />
+					<Label text= "{{ title }}" id="title" row="0" col="1" />
+
+					<Label text="Category:" row="1" col="0" />
+					<Label text= "{{ category }}" id="category" row="1" col="1" />
+
+					<Label text="Created By:" row="2" col="0" />
+					<Label text= "{{ createdBy }}" id="createdBy" row="2" col="1" />
+				</GridLayout>
+
+				<!--<Label text= "{{ title }}" id="title"  horizontalAlignment="center" verticalAlignment="center"/>-->
 			</ListView.itemTemplate>
 		</ListView>
 
