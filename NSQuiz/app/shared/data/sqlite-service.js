@@ -1,9 +1,15 @@
 "use strict";
  var Sqlite = require("nativescript-sqlite");
 
-exports.initializeSQLite = function() {
+var quizDb = {
+	initializeSQLite: initializeSQLite
+}
+
+module.exports = quizDb;
+
+function initializeSQLite() {
 	
-	var db_promise = new Sqlite("nsQuiz.sqlite", function(err, db) {
+	return new Sqlite("nsQuiz.sqlite", function(err, db) {
     	if (err) { 
      		console.error("We failed to open database", err);
     	} 
@@ -17,7 +23,10 @@ exports.initializeSQLite = function() {
     	console.log("Table created..."); 
 	});
 
-	// db_promise.then(function(db) {
+
+
+
+ //   db_promise.then(function(db) {
  //    // This should ALWAYS be true, db object is open in the "then" 
  //      console.log("Are we open yet (Inside Promise)? ", db.isOpen() ? "Yes" : "No"); // Yes 
  //      db.close();

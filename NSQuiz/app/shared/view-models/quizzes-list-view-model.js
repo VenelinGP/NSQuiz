@@ -27,10 +27,10 @@ function QuizzesListViewModel(items) {
     		});
     		console.log('%s',quizzes.id);
     		console.log('%s',quizzes.title);
-    		console.log('%s',quizzes.category);
-    		console.log('%s',quizzes.createdBy);
-    		console.log('%s',quizzes.createdOn);
-    		console.log('%s',quizzes.avatarUrl);
+    		// console.log('%s',quizzes.category);
+    		// console.log('%s',quizzes.createdBy);
+    		// console.log('%s',quizzes.createdOn);
+    		// console.log('%s',quizzes.avatarUrl);
     	});
     });
 };
