@@ -1,0 +1,14 @@
+<GridLayout cssClass="drawerContent" loaded="pageLoaded"
+            columns="auto" rows="2*, 1*, 20*">
+
+    <StackLayout cssClass="drawerHeader" row="0" col="0">
+        <Label id="sidebarHeader" />
+    </StackLayout>
+
+    <StackLayout cssClass="drawerMenuContent" row="2" col="0">
+        <Label text="View All Quizzes" tap="goToList"/>
+        <Label text="Solve todo"/>
+        <Label text="Create todo"/>
+        <Label text="My Profile todo"/>
+    </StackLayout>
+</GridLayout>

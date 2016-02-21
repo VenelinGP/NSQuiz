@@ -7,12 +7,11 @@ function pageLoaded(args) {
 	var page = args.object;
 	quiz = page.navigationContext;
 
-	console.log('page loaded');
-	console.log('Quiz for solving: %s', quiz.title);
+	console.log('quiz loaded: %s', quiz.title);
 }
 
 function onNavigatedTo(args) {
-	console.log('navigated to	');
+	console.log('quiz navigated to');
 }
 
 var pageObject = {

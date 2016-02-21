@@ -43,3 +43,9 @@ image {
     color: #284848;
     horizontal-align: center;
 }
+
+.drawerContent {
+	color: #034793;
+	background-color: #fff;
+	opacity: 0.72;
+}
