@@ -4,9 +4,7 @@
 		<ListView items="{{ quizzesList }}" itemLoading="onItemLoading" itemTap="onItemTap">
 			<ListView.itemTemplate>
 				<!--3 row 2 columns-->
-				<GridLayout columns="auto, 1*"
-							rows="auto, auto, auto"
-							style.backgroundColor="lightgray" >
+				<GridLayout columns="auto, 1*" rows="auto, auto, auto" style.backgroundColor="lightgray" tap="{{onItemTap}}">
 
 					<!--Wont Ids get repeated?-->
 
@@ -20,7 +18,7 @@
 					<Label text= "{{ createdBy }}" id="createdBy" row="2" col="1" />
 				</GridLayout>
 
-				<!--<Label text= "{{ title }}" id="title"  horizontalAlignment="center" verticalAlignment="center"/>-->
+
 			</ListView.itemTemplate>
 		</ListView>
 
