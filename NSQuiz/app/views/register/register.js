@@ -1,5 +1,6 @@
 "use strict";
 var dialogsModule = require("ui/dialogs");
+var Toast = require("nativescript-toast");
 var navigation = require("../../shared/navigation");
 var UserViewModel = require("../../shared/view-models/user-view-model");
 var formUtil = require("../../shared/utils/form-util").init();
@@ -40,10 +41,18 @@ function register() {
 
     user.register()
         .then(function () {
-            // Todo: try auto login
+            Toast.makeText("Your account was successfully created.\nLogging in...").show();
+        })
+        .then(user.login)
+        .then(function () {
             dialogsModule
-                .alert("Your account was successfully created.")
-                .then(navigation.goToLoginPage);
+                .alert("Welcome " + user.username)
+                .then(navigation.goToQuizListPage)
+        }, function (error) {
+            throw {
+                error: "Auto Login Error",
+                message: "There was a problem logging you in automatically, try manually"
+            };
         })
         .catch(function (error) {
             errorHandler.handleRegistrationError(error);

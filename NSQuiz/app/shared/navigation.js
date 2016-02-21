@@ -3,8 +3,11 @@ var config = require("./config");
 var frameModule = require("ui/frame");
 
 module.exports = {
-	goToLoginPage: function() {
-		frameModule.topmost().navigate("views/login/signInView");
+	goToLoginPage: function(clearHistory) {
+		frameModule.topmost().navigate({
+			moduleName: "views/login/signInView",
+			clearHistory: clearHistory
+		});
 	},
 	goToRegisterPage: function() {
 		frameModule.topmost().navigate("views/register/register");
@@ -33,8 +36,14 @@ module.exports = {
 		});
 	},
 	startingPage: function() {
-		return config.token
+		var moduleName = config.token
 			? "views/quiz/list/quiz-list"
 			: "views/login/signInView";
+
+		console.log('module name: %s', moduleName);
+
+		return {
+			moduleName: moduleName
+		}
 	}
 };

@@ -19,13 +19,15 @@ function handleUnauthorisedError(error, message) {
 
     dialogsModule
         .alert(message)
-        .then(navigation.goToLoginPage);
+        .then(function() {
+            navigation.goToLoginPage(true);
+        });
 
     logError(error);
 }
 
 function handleRegistrationError(error) {
-    var message = "Unfortunately we were unable to create your account.";
+    var message = error.message || "Unfortunately we were unable to create your account.";
 
     if (error.content && error.content.modelState) {
         message = "";

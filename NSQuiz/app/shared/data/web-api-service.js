@@ -48,7 +48,6 @@ function register(user) {
 
 function login(user) {
     var data = 'grant_type=password&username=' + (user.username || '') + '&password=' + (user.password || '');
-
     return new Promise(function (resolve, reject) {
         http.request({
             url: BASE_URL + 'token',
@@ -70,9 +69,8 @@ function login(user) {
                 appConfig.token = tokenValue;
 
                 // set the current user information right away to be quickly accessed later
-                currentUserInfo();
-
-                resolve(content);
+                currentUserInfo()
+                    .then(resolve);
             })
             .catch(function (error) {
                 reject(error);
@@ -81,7 +79,6 @@ function login(user) {
 }
 
 function currentUserInfo() {
-
     return new Promise(function (resolve, reject) {
         http.request({
             url: BASE_URL + 'api/Account/UserInfo',
@@ -91,7 +88,7 @@ function currentUserInfo() {
             .then(function (response) {
                 var content = processResponse(response);
 
-                appConfig.currentUser = content;
+                appConfig.setUser(content);
                 resolve(content);
             })
             .catch(function (error) {
@@ -186,7 +183,7 @@ function processResponse(response) {
     }
 
     // Will redirect to login
-    if (status === 403) {
+    if (status === 401 || status === 403) {
         errorHandler.handleUnauthorisedError({
             error: 'Not Authorised Error',
             content: response.content.toJSON()
