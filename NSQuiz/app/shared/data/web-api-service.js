@@ -1,6 +1,7 @@
 'use strict';
 
 var appConfig = require('../config');
+var errorHandler = require('../utils/error-handler');
 var http = require('http');
 
 var BASE_URL = appConfig.apiUrl;
@@ -13,7 +14,8 @@ var webApiObject = {
     login: login,
     currentUserInfo: currentUserInfo,
     getCategories: getCategories,
-    getQuizzes: getQuizzes
+    getQuizzes: getQuizzes,
+    getTotalQuizzesCount: getTotalQuizzesCount
 };
 
 module.exports = webApiObject;
@@ -35,18 +37,10 @@ function register(user) {
             content: JSON.stringify(user)
         })
             .then(function (response) {
-                // Error here when JSON.stringify(response), response.content when response content is empty
-
-                if (response.statusCode >= 400) {
-                    var content = response.content.toJSON();
-                    logResponse(response, content);
-                } else {
-                    logResponse(response);
-                    resolve();
-                }
+                processResponse(response);
+                resolve();
             })
             .catch(function (error) {
-                logHttpError(error);
                 reject(error);
             });
     });
@@ -65,10 +59,9 @@ function login(user) {
             content: data
         })
             .then(function (response) {
-                var content = response.content.toJSON();
-                var tokenValue = content.access_token;
+                var content = processResponse(response);
 
-                logResponse(response, content);
+                var tokenValue = content.access_token;
 
                 // Todo: configure expiration if possible
                 var validTo = new Date();
@@ -76,16 +69,19 @@ function login(user) {
 
                 appConfig.token = tokenValue;
 
+                // set the current user information right away to be quickly accessed later
+                currentUserInfo();
+
                 resolve(content);
             })
             .catch(function (error) {
-                logHttpError(error);
                 reject(error);
             });
     });
 }
 
 function currentUserInfo() {
+
     return new Promise(function (resolve, reject) {
         http.request({
             url: BASE_URL + 'api/Account/UserInfo',
@@ -93,14 +89,13 @@ function currentUserInfo() {
             headers: applyAuthorisationHeader()
         })
             .then(function (response) {
-                var content = response.content.toJSON();
-                logResponse(response, content);
+                var content = processResponse(response);
 
-                appConfig.currentUser = response;
+                appConfig.currentUser = content;
                 resolve(content);
             })
             .catch(function (error) {
-                logHttpError(error);
+                errorHandler.logError(error);
                 reject(error);
             });
     });
@@ -113,13 +108,12 @@ function getCategories() {
             method: 'GET'
         })
             .then(function (response) {
-                var content = response.content.toJSON();
-                logResponse(response, content);
+                var content = processResponse(response);
 
                 resolve(content);
             })
             .catch(function (error) {
-                logHttpError(error);
+                errorHandler.logError(error);
                 reject(error);
             });
     });
@@ -136,16 +130,31 @@ function getQuizzes(page) {
             method: 'GET'
         })
             .then(function (response) {
-                var content = response.content.toJSON();
-                logResponse(response, content);
+                var content = processResponse(response);
 
                 resolve(content);
             })
             .catch(function (error) {
-                logHttpError(error);
+                errorHandler.logError(error);
                 reject(error);
             });
     });
+}
+
+function getTotalQuizzesCount() {
+    http.request({
+        url: BASE_URL + '/api/quizzes/count',
+        method: 'GET'
+    })
+        .then(function (response) {
+            var content = processResponse(response);
+
+            resolve(content);
+        })
+        .catch(function (error) {
+            errorHandler.logError(error);
+            reject(error);
+        });
 }
 
 // ======================================================
@@ -155,47 +164,52 @@ function getQuizzes(page) {
 function applyAuthorisationHeader(headers) {
     if (!headers) {
         return {
-            'Authorisation': 'Bearer ' + appConfig.token
+            'Authorization': 'Bearer ' + appConfig.token
         };
     }
 
-    headers.Authorisation = 'Bearer ' + appConfig.token;
+    headers.Authorization = 'Bearer ' + appConfig.token;
 }
 
-function logResponse(response, content) {
-    if (response.statusCode >= 400) {
-        //logHttpError(content);
-        throw {
-            error: 'Http Module Error',
-            content: content
-        };
-    }
+function processResponse(response) {
+    var status = response.statusCode;
 
-    console.log('Http Success: status: %s, response: %s', response.statusCode, JSON.stringify(content));
-}
+    if (status < 400) {
+        printResponse(response);
 
-function logHttpError(error) {
-    console.log('!!! Http Error !!!');
-
-    logProperties(error);
-
-    console.log('!!! Error Report Ended !!!')
-}
-
-function logProperties(obj, indent) {
-    if (!indent || !indent.length) {
-        indent = "";
-    }
-
-    for (var prop in obj) {
-
-        if (obj[prop] !== null && typeof obj[prop] === 'object') {
-            console.log('%s%s', indent, prop);
-            logProperties(obj[prop], indent += "\t");
-        } else {
-            console.log('%s%s : %s', indent, prop, obj[prop]);
+        // Important if no content .toJSON() will crash... hence the check
+        if (response.content.raw.count > 0) {
+            return response.content.toJSON();
         }
+
+        return null;
     }
+
+    // Will redirect to login
+    if (status === 403) {
+        errorHandler.handleUnauthorisedError({
+            error: 'Not Authorised Error',
+            content: response.content.toJSON()
+        });
+
+        return null;
+    }
+
+    if (status >= 400) {
+        throw {
+            error: 'Http Error',
+            response: response,
+            content: response.content.toJSON()
+        };
+    }
+}
+
+function printResponse(response) {
+    console.log('==================== HTTP RESPONSE ====================');
+    console.log('Http Success: status: %s, content: %s',
+        response.statusCode,
+        response.content.toString());
+    console.log('=======================================================');
 }
 
 // ======================================================

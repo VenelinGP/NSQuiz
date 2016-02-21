@@ -1,9 +1,10 @@
 "use strict";
 var dialogsModule = require("ui/dialogs");
+var Toast = require("nativescript-toast");
 var navigation = require("../../shared/navigation");
 var formUtil = require("../../shared/utils/form-util").init();
 var UserViewModel = require("../../shared/view-models/user-view-model");
-var Toast = require("nativescript-toast");
+var errorHandler = require('../../shared/utils/error-handler');
 
 var user = new UserViewModel({authenticating: false});
 
@@ -41,20 +42,7 @@ function signIn() {
             Toast.makeText("Welcome back " + user.get("username")).show();
             // Todo: navigate...
         })
-        .catch(function (err) {
-            console.log(JSON.stringify(err));
-            var message = err.message || err.error;
-
-            if (err.content && err.content.error_description) {
-                message = err.content.error_description;
-            }
-
-            dialogsModule
-                .alert({
-                    message: message,
-                    okButtonText: "OK"
-                });
-        })
+        .catch(errorHandler.handleLoginError)
         .then(enableForm);
 }
 

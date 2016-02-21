@@ -3,6 +3,7 @@ var dialogsModule = require("ui/dialogs");
 var navigation = require("../../shared/navigation");
 var UserViewModel = require("../../shared/view-models/user-view-model");
 var formUtil = require("../../shared/utils/form-util").init();
+var errorHandler = require('../../shared/utils/error-handler');
 
 var user = new UserViewModel({authenticating: false});
 
@@ -44,12 +45,8 @@ function register() {
                 .alert("Your account was successfully created.")
                 .then(navigation.goToLoginPage);
         })
-        .catch(function () {
-            dialogsModule
-                .alert({
-                    message: "Unfortunately we were unable to create your account.",
-                    okButtonText: "OK"
-                });
+        .catch(function (error) {
+            errorHandler.handleRegistrationError(error);
         })
         .then(enableForm);
 }
