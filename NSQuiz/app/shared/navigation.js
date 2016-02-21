@@ -18,6 +18,12 @@ module.exports = {
 			clearHistory: true
 		});
 	},
+	goToSolveQuiz: function(quiz) {
+		frameModule.topmost().navigate({
+			moduleName: "views/quizList/quizList",
+			context: quiz
+		});
+	},
 	signOut: function() {
 		config.invalidateToken();
 		frameModule.topmost().navigate({
