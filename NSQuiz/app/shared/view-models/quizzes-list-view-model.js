@@ -1,46 +1,39 @@
 var config = require("../../shared/config");
-var fetchModule = require("fetch");
+var webApi = require("../../shared/data/web-api-service");
 var ObservableArray = require("data/observable-array").ObservableArray;
 
 function QuizzesListViewModel(items) {
     var viewModel = new ObservableArray(items);
 
-    viewModel.load = function() {
- 		return fetch(config.apiUrl + "api/quizzes", {
- 			 method: "GET",
-        	headers: {
-            	"Accept": "application/json"
-        	}
-    })
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(data){
-    	data.forEach(function(quizzes){
-    		viewModel.push({
-    			id: quizzes.id,
-    			title: quizzes.title,
-    			category: quizzes.category,
-    			createdBy: quizzes.createdBy,
-    			createdOn: quizzes.createdOn,
-    			avatarUrl: quizzes.avatarUrl
-    		});
-    		console.log('%s',quizzes.id);
-    		console.log('%s',quizzes.title);
-    		// console.log('%s',quizzes.category);
-    		// console.log('%s',quizzes.createdBy);
-    		// console.log('%s',quizzes.createdOn);
-    		// console.log('%s',quizzes.avatarUrl);
-    	});
-    });
-};
+    viewModel.load = function () {
+        webApi.getQuizzes()
+            .then(function (data) {
+                data.forEach(function (quiz) {
+                    viewModel.push({
+                        id: quiz.id,
+                        title: quiz.title,
+                        category: quiz.category,
+                        createdBy: quiz.createdBy,
+                        createdOn: quiz.createdOn,
+                        avatarUrl: quiz.avatarUrl
+                    });
+                    console.log('%s', quiz.id);
+                    console.log('%s', quiz.title);
+                    // console.log('%s',quiz.category);
+                    // console.log('%s',quiz.createdBy);
+                    // console.log('%s',quiz.createdOn);
+                    // console.log('%s',quiz.avatarUrl);
+                });
+            });
+    };
 
-viewModel.empty = function() {
-    while (viewModel.length) {
-        viewModel.pop();
-    }
-};
+    viewModel.empty = function () {
+        while (viewModel.length) {
+            viewModel.pop();
+        }
+    };
 
     return viewModel;
 }
+
 module.exports = QuizzesListViewModel;

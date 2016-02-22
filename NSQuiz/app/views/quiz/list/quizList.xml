@@ -1,4 +1,4 @@
-<StackLayout loaded="loaded">
+<StackLayout loaded="loaded" xmlns="http://schemas.nativescript.org/tns.xsd">
     <!--         <Button text="GET" tap="getRequest" /> -->
     <ListView items="{{ quizzesList }}" itemLoading="onItemLoading" itemTap="onItemTap">
         <ListView.itemTemplate>
