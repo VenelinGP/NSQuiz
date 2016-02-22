@@ -45,17 +45,27 @@ image {
 }
 
 .drawerContent {
-	color: #034793;
-	background-color: #fff;
+	color: #fff;
+	background-color: #222;
 	/*border-width: 1;*/
 	/*border-color: #000;*/
 	border-left-width: 0;
-	opacity: 0.8;
+	opacity: 0.9;
 }
 
 .drawerMenuContent Label {
 	margin-top: 16;
-	border-color: #333;
-	border-width: 1;
-	text-align: center;
+	/*border-color: #333;*/
+	/*border-width: 1;*/
+	text-align: left;
+}
+
+.menu {
+	background-color: #2691bd;
+}
+
+#close-button {
+	background-image: url('res://x_mark');
+	background-repeat: no-repeat;
+	background-size: contain;
 }
