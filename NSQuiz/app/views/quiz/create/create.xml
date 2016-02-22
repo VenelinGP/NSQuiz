@@ -1,0 +1,54 @@
+<StackLayout loaded="pageLoaded" xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <GridLayout rows="auto, auto, auto, auto, 1*, auto" padding="4">
+        <TextField id="quizTitle" text="{{ title }}"
+                   hint="Title" returnKeyType="next" row="0"/>
+        <TextField id="quizCategory" text="{{ category }}"
+                   hint="Category" returnKeyType="next" row="1" />
+        <TextField id="description" text="{{ description }}"
+                   hint="Description" returnKeyType="done" row="2" />
+        <Button text="Add Question" id="addQuestion" tap="addQuestion"  row="3" />
+
+        <ListView items="{{ questions }}" id="questions container" row="4">
+            <ListView.itemTemplate>
+                <GridLayout rows="auto, auto" columns="auto, 10*, 2*" backgroundColor="#fff">
+                    <TextField text="{{ title }}" id="title"
+                               horizontalAlignment="stretch" textAlignment="center"
+                               hint="Question Title" row="0" col="0" colSpan="3" />
+                    <Button text="Edit Answers" id="addAnswer" row="1" col="0" height="50" verticalAlignment="center" />
+                    <Label text="Answers" row="1" col="1" verticalAlignment="center" />
+                    <label text="{{ answers.length }}" row="1" col="2" verticalAlignment="center" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+
+        <StackLayout row="5" orientation="horizontal">
+            <Button  text="Reset" id="resetButton" tap="resetQuiz" width="49%" />
+            <Button  text="Create" id="createButton" tap="createQuiz" width="49%" isEnabled = "{{ canSubmit() }}" />
+        </StackLayout>
+
+    </GridLayout>
+
+    <!--<ListView items="{{ quizzesList }}" itemLoading="onItemLoading" itemTap="onItemTap">-->
+        <!--<ListView.itemTemplate>-->
+            <!--<!--2 row 4 columns-->-->
+            <!--<GridLayout columns="auto, 1*, auto, 1*" rows="auto, auto" style.backgroundColor="lightgray"-->
+                        <!--tap="{{onItemTap}}">-->
+
+                <!--<!--Wont Ids get repeated?-->-->
+
+                <!--<Label text="Quiz:" row="0" col="0" class="titleLabel"/>-->
+                <!--<Label text="{{ title }}" id="title" row="0" col="1" colSpan="3" class="title"/>-->
+
+                <!--<Label text="Category:" row="1" col="0" class="contentLabel"/>-->
+                <!--<Label text="{{ category }}" id="category" row="1" col="1" class="content"/>-->
+
+                <!--<Label text="Created By:" row="1" col="2" class="contentLabel"/>-->
+                <!--<Label text="{{ createdBy }}" id="createdBy" row="1" col="3" class="content"/>-->
+            <!--</GridLayout>-->
+
+
+        <!--</ListView.itemTemplate>-->
+    <!--</ListView>-->
+
+</StackLayout>
