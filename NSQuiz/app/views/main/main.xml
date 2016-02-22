@@ -1,8 +1,27 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
-  <StackLayout>
-  	
-    <Label text="Tap the button" class="title"/>
-    <Button text="TAP" tap="{{ tapAction }}" />
-    <Label text="{{ message }}" class="message" textWrap="true"/>
-  </StackLayout>
+<Page loaded="pageLoaded"
+      xmlns:drawer="nativescript-telerik-ui/sidedrawer"
+      xmlns="http://www.nativescript.org/tns.xsd"
+      xmlns:sideContent="views/side-content">
+  <ActionBar title="NS Quiz">
+    <NavigationButton
+            text="Menu"
+            android.systemIcon="ic_menu_moreoverflow_normal_holo_light"
+            ios.systemIcon="4"
+            tap="toggleSidebar"/>
+  </ActionBar>
+
+  <drawer:RadSideDrawer id="side-drawer">
+    <drawer:RadSideDrawer.mainContent>
+        <!-- Content is loaded here dynamically -->
+        <StackLayout id="main-content" />
+
+    </drawer:RadSideDrawer.mainContent>
+
+    <drawer:RadSideDrawer.drawerContent>
+      <StackLayout cssClass="drawerContent">
+          <sideContent:side />
+      </StackLayout>
+
+    </drawer:RadSideDrawer.drawerContent>
+  </drawer:RadSideDrawer>
 </Page>

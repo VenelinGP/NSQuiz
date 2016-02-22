@@ -7,8 +7,9 @@ var database = require("./shared/data/sqlite-service");
 
 application.cssFile = "./styles/app.css";
 
-// application.mainModule = "./views/login/signInView";
-application.mainModule = "./views/quiz/list/quiz-list";
+//application.mainModule = "./views/login/signInView";
+//application.mainModule = "./views/quiz/list/quiz-list";
+application.mainModule = "./views/main/main";
 
 application.on(application.launchEvent, function(args) {
     //config.invalidateToken();

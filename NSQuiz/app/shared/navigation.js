@@ -1,6 +1,11 @@
 "use strict";
 var config = require("./config");
 var frameModule = require("ui/frame");
+var builder = require("ui/builder");
+
+var mainPage;
+var placeholder;
+var sideDrawer;
 
 module.exports = {
 	goToLoginPage: function(clearHistory) {
@@ -16,16 +21,22 @@ module.exports = {
 		frameModule.topmost().navigate("views/password/password");
 	},
 	goToQuizListPage: function() {
-		frameModule.topmost().navigate({
-			moduleName: "views/quiz/list/quiz-list",
-			clearHistory: true
+		var quizList = builder.load({
+			path: "views/quiz/list",
+			name: "quizList"
 		});
+
+		navigate(quizList);
 	},
 	goToSolveQuiz: function(quiz) {
-		frameModule.topmost().navigate({
-			moduleName: "views/quiz/solve/quiz-solve",
-			context: quiz
+		var solveView = builder.load({
+			path: "views/quiz/solve/",
+			name: "quizSolve"
 		});
+
+		solveView.navigationContext = quiz;
+
+		navigate(solveView, quiz);
 	},
 	signOut: function() {
 		config.invalidateToken();
@@ -45,5 +56,23 @@ module.exports = {
 		return {
 			moduleName: moduleName
 		}
+	},
+	setMainPage: function(page) {
+		mainPage = page;
+	},
+	setPlaceholder: function(container) {
+		placeholder = container;
+	},
+	setDrawer: function(drawer) {
+		sideDrawer = drawer;
 	}
 };
+
+function navigate(partial, data) {
+	frameModule.topmost().navigate({
+		moduleName: "views/main/main",
+		context: {
+			partial: partial, data: data
+		}
+	});
+}
