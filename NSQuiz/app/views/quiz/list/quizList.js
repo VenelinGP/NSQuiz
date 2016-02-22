@@ -21,11 +21,15 @@ exports.loaded = function (args) {
     page = args.object;
     page.bindingContext = pageData;
 
-    countQuizzesFromDB = quizDb.getCountQuizzes();
-    countQuizzesFromDB.then( function(count){
-        console.log(JSON.stringify(count));
+    quizDb.getCountQuizzes(function(row){
+        // Този код ще се изпълни когато базата приключи със заявката
+        //errorHandler.logError(count);
+        console.log('count from db', JSON.stringify(row));
+        //console.log('length is: ', row.length);
     });
-    console.log("Hi %s",countQuizzesFromDB.lenght);
+
+    // Това тук ще се изпълни преди горният реди, за това винаги ще ти дава undefined
+    //console.log("Hi %s",countQuizzesFromDB.lenght);
 
     quizDb.setQuizzes();
     quizzesList.empty();

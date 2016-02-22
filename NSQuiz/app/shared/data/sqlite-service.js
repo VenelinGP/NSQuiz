@@ -25,7 +25,7 @@ function initializeSQLite() {
 	});
 }
 
-function getCountQuizzes() {
+function getCountQuizzes(callback) {
 	return new Sqlite("nsQuiz.sqlite", function(err, db) {
 		if (err) { 
      		console.error("We failed to open database", err);
@@ -34,9 +34,10 @@ function getCountQuizzes() {
       		// This should ALWAYS be true, db object is open in the "Callback" if no errors occurred 
       		console.log("Are we open yet (Inside Callback)? ", db.isOpen() ? "Yes" : "No"); // Yes 
     	}
-      global.db.all('select * from quizzes where quizId >= ? and quizId <= ?', [1, 100], 
+      db.all('select * from quizzes where quizId >= ? and quizId <= ?', [1, 100],
           function (err, row) {
-            console.log("Row results it:", row); // Prints ["Row x Field_1", "Row x Field 2"...] for each row passed to it 
+            console.log("Row results it:", row); // Prints ["Row x Field_1", "Row x Field 2"...] for each row passed to it
+			  callback(row);
           });
 		// global.db.each('select * from quizzes where quizId >= ? and quizId <= ?', [1, 100],
 		// 	function(err, row) {
