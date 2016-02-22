@@ -30,7 +30,7 @@ action-bar, .main-color {
 }
 
 
-text-field {
+text-field, text-view {
 	margin: 10;
 	padding: 10;
 	color: #FA0;
@@ -94,4 +94,20 @@ image {
 
 .content{
 	font-size: 16
+}
+
+.btn {
+	margin: 4;
+	padding: 4;
+}
+
+.btn-main {
+	color: #034793;
+	background-color: #25ff00;
+}
+
+.form-label {
+	margin: 0;
+	padding: 0;
+	color: #fff;
 }
