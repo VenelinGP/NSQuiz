@@ -1,9 +1,9 @@
 ﻿@import { url('~/styles/platform.css') };
 
 page {
-	background-color: #25575E;
+	background-color: #29729c;
 	color: #FA0;
-	font-size: 17;
+	font-size: 18;
 }
 
 label {
@@ -22,11 +22,11 @@ button {
 }
 
 action-bar {
-	color: #FA0;
+	color: #fff;
 }
 
 action-bar, .main-color {
-	background-color: #25575E;
+	background-color: #11fa06;
 }
 
 
@@ -35,6 +35,7 @@ text-field, text-view {
 	padding: 10;
 	color: #FA0;
 	background-color: white;
+	border-radius: 4;
 }
 
 image {
@@ -99,11 +100,12 @@ image {
 .btn {
 	margin: 4;
 	padding: 4;
+	border-radius: 8;
 }
 
 .btn-main {
 	color: #034793;
-	background-color: #25ff00;
+	background-color: #11fa06;
 }
 
 .form-label {
