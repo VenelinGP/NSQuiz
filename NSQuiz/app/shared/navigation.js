@@ -3,8 +3,6 @@ var config = require("./config");
 var frameModule = require("ui/frame");
 var builder = require("ui/builder");
 
-var mainPage;
-var placeholder;
 var sideDrawer;
 
 module.exports = {
@@ -38,6 +36,18 @@ module.exports = {
 
 		navigate(solveView, quiz);
 	},
+	goToCreateQuiz: function() {
+		if (!config.isAuthenticated) {
+			this.goToLoginPage();
+		}
+
+		var createQuiz = builder.load({
+			path: "views/quiz/create",
+			name: "create"
+		});
+
+		navigate(createQuiz);
+	},
 	signOut: function() {
 		config.invalidateToken();
 		frameModule.topmost().navigate({
@@ -47,24 +57,17 @@ module.exports = {
 		});
 	},
 	startingPage: function() {
-		var moduleName = config.token
-			? "views/quiz/list/quiz-list"
-			: "views/login/signInView";
-
-		console.log('module name: %s', moduleName);
-
 		return {
-			moduleName: moduleName
+			moduleName: 'views/main/main'
 		}
-	},
-	setMainPage: function(page) {
-		mainPage = page;
-	},
-	setPlaceholder: function(container) {
-		placeholder = container;
 	},
 	setDrawer: function(drawer) {
 		sideDrawer = drawer;
+	},
+	toggleDrawer: function () {
+		if (sideDrawer) {
+			sideDrawer.toggleDrawerState();
+		}
 	}
 };
 
