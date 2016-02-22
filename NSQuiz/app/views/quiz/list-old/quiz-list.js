@@ -21,15 +21,17 @@ exports.loaded = function (args) {
     page.bindingContext = pageData;
 
     // quizDb.setQuizzes();
-
+    
     quizzesList.empty();
     quizzesList.load();
 
-    countQuizzesFromDB = quizDb.getCountQuizzes().then(function(count) {
-      return count.result;
-    });
 
-    console.log(countQuizzesFromDB);
+    countQuizzesFromDB = quizDb.getCountQuizzes();
+    console.log("Hi %s",countQuizzesFromDB);
+
+    
+
+    
     // countQuizzesFromWeb = webApi.getTotalQuizzesCount().then(function(result){
     // 	return result.count;
     // });

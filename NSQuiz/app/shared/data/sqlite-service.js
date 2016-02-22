@@ -34,13 +34,17 @@ function getCountQuizzes() {
       		// This should ALWAYS be true, db object is open in the "Callback" if no errors occurred 
       		console.log("Are we open yet (Inside Callback)? ", db.isOpen() ? "Yes" : "No"); // Yes 
     	}
-		global.db.each('select * from quizzes where quizId >= ? and quizId <= ?', [1, 100],
-			function(err, row) {
-  				console.log("Row results it:", row);
-			})
-			.then(function (count) {
- 				 return this.count; // Prints 100  (Assuming their are a 100 rows found) 
-				});
+      global.db.all('select * from quizzes where quizId >= ? and quizId <= ?', [1, 100], 
+          function (err, row) {
+            console.log("Row results it:", row); // Prints ["Row x Field_1", "Row x Field 2"...] for each row passed to it 
+          });
+		// global.db.each('select * from quizzes where quizId >= ? and quizId <= ?', [1, 100],
+		// 	function(err, row) {
+  // 				console.log("Row results it:", row);
+		// 	})
+			// .then(function (count) {
+ 		// 		 return this.count; // Prints 100  (Assuming their are a 100 rows found) 
+			// 	});
 	});
 }
 
@@ -53,7 +57,7 @@ function setQuizzes() {
       		// This should ALWAYS be true, db object is open in the "Callback" if no errors occurred 
       		console.log("Are we open yet (Inside Callback)? ", db.isOpen() ? "Yes" : "No"); // Yes 
     	}
-		global.db.execSQL("insert into quizzes (quizId, title, category, createdBy, createdOn ) values (?, ?, ?, ?, ?)", [1, "Terminator", "movies", "Some", "Today"],
+		global.db.execSQL("insert into quizzes (quizId, title, category, createdBy, createdOn ) values (?, ?, ?, ?, ?)", [4, "Terminator", "movies", "Some", "Today"],
 			function(err, id) {
   				console.log("The new record id is:", id);
 			});
