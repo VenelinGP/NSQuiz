@@ -5,7 +5,7 @@
 
     <StackLayout row="0" cssClass="menu" orientation="horizontal"  padding="4">
         <Label text="Menu" fontSize="24" marginRight="186" verticalAlignment="center"/>
-        <Button width="50" height="100" margin="0" id="close-button" tap="closeSidebar" />
+        <Button width="50" height="100" margin="0" id="close-button" tap="toggleSideDrawer" />
     </StackLayout>
 
     <StackLayout orientation="horizontal"
@@ -27,7 +27,7 @@
     <StackLayout cssClass="drawerMenuContent" row="3" col="0" width="70%" horizontalAlignment="left" padding="4">
         <Label text="View All Quizzes" tap="goToList"/>
         <Label text="Solve todo"/>
-        <Label text="Create todo"/>
+        <Label text="Create" tap="goToCreate"/>
         <Label text="My Profile todo"/>
 
     </StackLayout>

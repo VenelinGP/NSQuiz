@@ -10,6 +10,8 @@ function pageLoaded(args) {
     var page = args.object;
 
     drawer = page.getViewById('side-drawer');
+    navigation.setDrawer(drawer);
+
     mainContentPlaceholder = page.getViewById('main-content');
 
     setupPageLayout(page.navigationContext);

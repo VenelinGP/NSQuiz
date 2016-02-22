@@ -16,7 +16,9 @@ function pageLoaded(args) {
 
 var viewObject = {
     pageLoaded: pageLoaded,
-    goToList: navigation.goToQuizListPage
+    goToList: navigation.goToQuizListPage,
+    goToCreate: navigation.goToCreateQuiz,
+    toggleSideDrawer: navigation.toggleDrawer
 };
 
 module.exports = viewObject;
