@@ -69,8 +69,7 @@ function login(user) {
                 appConfig.token = tokenValue;
 
                 // set the current user information right away to be quickly accessed later
-                currentUserInfo()
-                    .then(resolve);
+                resolve(currentUserInfo());
             })
             .catch(function (error) {
                 reject(error);

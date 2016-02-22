@@ -1,14 +1,23 @@
-<GridLayout cssClass="drawerContent" loaded="pageLoaded"
-            columns="auto" rows="2*, 1*, 20*">
-
-    <StackLayout cssClass="drawerHeader" row="0" col="0">
-        <Label id="sidebarHeader" />
+<GridLayout xmlns="http://schemas.nativescript.org/tns.xsd"
+            cssClass="drawerContent" loaded="pageLoaded"
+            padding="4"
+            columns="auto"
+            rows="5*, 1*, 20*">
+    <StackLayout orientation="horizontal"  width="100%" padding="1"
+                 cssClass="drawerHeader" row="0" col="0">
+        <Image src="res://quiz_icon" margin="0 8 0 0" stretch="aspectFit" width="30%" />
+        <Label id="sidebarHeader"  text="Hello"
+               width="60%"
+               verticalAlignment="center" fontSize="28" />
     </StackLayout>
 
-    <StackLayout cssClass="drawerMenuContent" row="2" col="0">
+    <stack-layout row="1" col="0" horizontalAlignment="stretch" width="100%" height="2" backgroundColor="#000" />
+
+    <StackLayout cssClass="drawerMenuContent" row="2" col="0" width="70%" horizontalAlignment="left">
         <Label text="View All Quizzes" tap="goToList"/>
         <Label text="Solve todo"/>
         <Label text="Create todo"/>
         <Label text="My Profile todo"/>
+
     </StackLayout>
 </GridLayout>

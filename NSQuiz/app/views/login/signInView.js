@@ -40,7 +40,7 @@ function signIn() {
     user.login()
         .then(function () {
             Toast.makeText("Welcome back " + user.get("username")).show();
-            // Todo: navigate...
+            navigation.goToQuizListPage();
         })
         .catch(errorHandler.handleLoginError)
         .then(enableForm);
