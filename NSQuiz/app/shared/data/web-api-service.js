@@ -15,6 +15,7 @@ var webApiObject = {
     currentUserInfo: currentUserInfo,
     getCategories: getCategories,
     getQuizzes: getQuizzes,
+    getById: getById,
     getTotalQuizzesCount: getTotalQuizzesCount
 };
 
@@ -135,6 +136,24 @@ function getQuizzes(page) {
                 reject(error);
             });
     });
+}
+
+function getById(id) {
+    return new Promise(function (resolve, reject) {
+        http.request({
+            url: BASE_URL + 'api/quizzes/' + id,
+            method: 'GET'
+        })
+            .then(function (response) {
+                var content = processResponse(response);
+
+                resolve(content);
+            })
+            .catch(function (error) {
+                errorHandler.logError(error);
+                reject(error);
+            })
+    })
 }
 
 function getTotalQuizzesCount() {

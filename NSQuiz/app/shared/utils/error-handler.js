@@ -7,6 +7,7 @@ var handlerObject = {
     handleUnauthorisedError: handleUnauthorisedError,
     handleRegistrationError: handleRegistrationError,
     handleLoginError: handleLoginError,
+    handleQuizGetError: handleQuizGetError,
     logError: logError
 };
 
@@ -29,22 +30,13 @@ function handleUnauthorisedError(error, message) {
 function handleRegistrationError(error) {
     var message = error.message || "Unfortunately we were unable to create your account.";
 
-    if (error.content && error.content.modelState) {
-        message = "";
-        var errors = error.content.modelState;
+    modelStateErrorHandler(error, message);
+}
 
-        for (var prop in errors) {
-            if (errors.hasOwnProperty(prop)) {
-                message += errors[prop] + '\n';
-            }
-        }
+function handleQuizGetError(error) {
+    var message = error.message || "Failed to retrieve data, check your connection";
 
-        message = message.trim();
-    }
-
-    dialogsModule.alert(message);
-
-    logError(error);
+    modelStateErrorHandler(error, message);
 }
 
 function handleLoginError(error) {
@@ -75,6 +67,16 @@ function logError(error) {
     console.log('===================================')
 }
 
+function modelStateErrorHandler(error, altMessage) {
+    if (error.content && error.content.modelState) {
+        var modelStateMessage = extractModelStateErrors(error.content.modelState);
+    }
+
+    dialogsModule.alert(modelStateMessage || altMessage);
+
+    logError(error);
+}
+
 function logProperties(obj, indent) {
     if (!indent || !indent.length) {
         indent = "";
@@ -82,11 +84,25 @@ function logProperties(obj, indent) {
 
     for (var prop in obj) {
 
-        if (obj[prop] !== null && typeof obj[prop] === 'object') {
-            console.log('%s%s', indent, prop);
-            logProperties(obj[prop], indent += "\t");
-        } else {
-            console.log('%s%s : %s', indent, prop, obj[prop]);
+        if(obj.hasOwnProperty(prop)) {
+            if (obj[prop] !== null && typeof obj[prop] === 'object') {
+                console.log('%s%s', indent, prop);
+                logProperties(obj[prop], indent += "\t");
+            } else {
+                console.log('%s%s : %s', indent, prop, obj[prop]);
+            }
         }
     }
+}
+
+function extractModelStateErrors(modelState) {
+    var message = "";
+
+    for (var prop in modelState) {
+        if (modelState.hasOwnProperty(prop)) {
+            message += modelState[prop] + '\n';
+        }
+    }
+
+    return message.trim();
 }
