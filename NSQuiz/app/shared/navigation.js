@@ -48,6 +48,12 @@ module.exports = {
 
 		navigate(createQuiz);
 	},
+	goToEditQuestion: function(question) {
+		frameModule.topmost().navigate({
+			moduleName: 'views/quiz/create/edit-question/edit-question',
+			context: question
+		});
+	},
 	signOut: function() {
 		config.invalidateToken();
 		frameModule.topmost().navigate({

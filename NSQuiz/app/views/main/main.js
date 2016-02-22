@@ -5,6 +5,14 @@ var builder = require("ui/builder");
 var drawer;
 var mainContentPlaceholder;
 
+var viewObject = {
+    pageLoaded: pageLoaded,
+    toggleSidebar: toggleSidebar,
+    onNavigatedTo: onNavigatedTo
+};
+
+module.exports = viewObject;
+
 function pageLoaded(args) {
     console.log("Main page loaded");
     var page = args.object;
@@ -32,9 +40,3 @@ function setupPageLayout(navContext) {
     }
 }
 
-var viewObject = {
-    pageLoaded: pageLoaded,
-    toggleSidebar: toggleSidebar
-};
-
-module.exports = viewObject;

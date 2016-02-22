@@ -1,9 +1,11 @@
 'use strict';
-var navigation = require("../../../shared/navigation");
-var CreateQuizModel = require('./quiz-view-model');
-var dialogsModule = require("ui/dialogs");
+var navigation = require('~/shared/navigation');
+var CreateQuizModel = require('./models/quiz-view-model');
+var dialogsModule = require('ui/dialogs');
+var webApi = require('~/shared/data/web-api-service');
 
-var page;
+var view;
+var categories = [];
 var pageData = new CreateQuizModel();
 
 var pageObject = {
@@ -11,19 +13,24 @@ var pageObject = {
     onItemTap: onItemTap,
     addQuestion: addQuestion,
     resetQuiz: resetQuiz,
-    canReset: canReset
+    selectCategory: selectCategory
 };
 
 module.exports = pageObject;
 
 function pageLoaded(args) {
-    page = args.object;
-    page.bindingContext = pageData;
+    view = args.object;
+    view.bindingContext = pageData;
 }
 
 function addQuestion() {
     console.log('total questions: %d', pageData.questions.length);
-    pageData.newQuestion();
+    var question = pageData.newQuestion();
+    navigation.goToEditQuestion(question);
+}
+
+function editQuestion(args) {
+    console.log(args);
 }
 
 function resetQuiz() {
@@ -36,8 +43,19 @@ function resetQuiz() {
         });
 }
 
-function canReset() {
-    return pageData.questions.length > 0;
+function selectCategory() {
+    var categoriesPage = 'views/quiz/create/categories';
+
+    webApi.getCategories()
+        .then(function (result) {
+            console.log('categories');
+            console.log(JSON.stringify(result));
+
+            view.page.showModal(categoriesPage, result, function (selected) {
+                console.log('selected a category: %s', selected);
+                pageData.category = selected;
+            });
+        });
 }
 
 function onItemTap(args) {

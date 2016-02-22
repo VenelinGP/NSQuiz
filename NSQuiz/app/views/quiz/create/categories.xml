@@ -1,0 +1,11 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      shownModally="onShownModally" backgroundColor="transparent">
+    <GridLayout rows="auto, auto"
+                horizontalAlignment="stretch" padding="12"
+                backgroundColor="#259"
+                borderRadius="15">
+        <ListPicker id="quiz-categories" row="0"/>
+        <Button text="Ready" tap="onReadyTap" row="1" />
+    </GridLayout>
+
+</Page>
