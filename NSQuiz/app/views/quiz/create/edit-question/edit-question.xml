@@ -1,0 +1,28 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="registerView" >
+    <Page.actionBar>
+        <ActionBar title="Question Details" />
+    </Page.actionBar>
+
+        <StackLayout>
+            <TextField text="{{ title }}" id="title"
+                       horizontalAlignment="stretch" textAlignment="center"
+                       hint="Question Title" />
+            <TextView text="{{ alternative }}" id="title"
+                       horizontalAlignment="stretch" textAlignment="center"
+                       hint="Explanation shown when the question is answered incorrectly" />
+
+            <Button  text="Add Answer" tap="addAnswer" />
+
+            <ListView items="{{ answers }}" id="answers-container">
+                <ListView.itemTemplate>
+                    <GridLayout columns="20, 1*, 50" backgroundColor="#fff">
+                        <Label text="Cor" col="0" />
+                        <TextField text="{{ text }}" id="title"
+                                   horizontalAlignment="stretch" textAlignment="center"
+                                   hint="Question Title"  col="1" />
+                        <Button text="Remove" col="2" tap="removeAnswer" />
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </StackLayout>
+</Page>

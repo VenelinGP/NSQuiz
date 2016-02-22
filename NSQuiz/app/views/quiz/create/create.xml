@@ -11,13 +11,12 @@
 
         <ListView items="{{ questions }}" id="questions container" row="4">
             <ListView.itemTemplate>
-                <GridLayout rows="auto, auto" columns="auto, 10*, 2*" backgroundColor="#fff">
-                    <TextField text="{{ title }}" id="title"
-                               horizontalAlignment="stretch" textAlignment="center"
-                               hint="Question Title" row="0" col="0" colSpan="3" />
-                    <Button text="Edit Answers" id="addAnswer" row="1" col="0" height="50" verticalAlignment="center" />
-                    <Label text="Answers" row="1" col="1" verticalAlignment="center" />
-                    <label text="{{ answers.length }}" row="1" col="2" verticalAlignment="center" />
+                <GridLayout rows="auto, auto" columns="auto, 10*, 2*, 2*" backgroundColor="#fff">
+                    <Label text="{{ title }}" id="title" row="0" col="0" colSpan="4" textAlignment="center" />
+                    <Label text="Answers" row="1" col="0" verticalAlignment="center" />
+                    <label text="{{ answers.length }}" row="1" col="1" verticalAlignment="center" />
+                    <Button text="Edit" row="1" col="2" verticalAlignment="center" />
+                    <Button text="Delete" row="1" col="3" verticalAlignment="center" />
                 </GridLayout>
             </ListView.itemTemplate>
         </ListView>
