@@ -1,16 +1,23 @@
 'use strict';
+var Observable = require("data/observable").Observable;
+var dialogsModule = require('ui/dialogs');
+
 var navigation = require('~/shared/navigation');
 var CreateQuizModel = require('./models/quiz-view-model');
-var dialogsModule = require('ui/dialogs');
 var webApi = require('~/shared/data/web-api-service');
 
 var view;
-var categories = [];
-var pageData = new CreateQuizModel();
+// don't access categories directly as they are loaded async use the loadCategories to get hold of the promise
+var __categories = [];
+var quizData = new CreateQuizModel();
+
+var context = new Observable({
+    pageIsBusy: false,
+    quizData: quizData
+});
 
 var pageObject = {
     pageLoaded: pageLoaded,
-    onItemTap: onItemTap,
     addQuestion: addQuestion,
     resetQuiz: resetQuiz,
     selectCategory: selectCategory
@@ -20,7 +27,10 @@ module.exports = pageObject;
 
 function pageLoaded(args) {
     view = args.object;
-    view.bindingContext = pageData;
+    view.bindingContext = context;
+
+    // loads categories in the background
+    loadCategories();
 }
 
 function addQuestion() {
@@ -46,21 +56,31 @@ function resetQuiz() {
 function selectCategory() {
     var categoriesPage = 'views/quiz/create/categories';
 
-    webApi.getCategories()
+    context.pageIsBusy = true;
+    loadCategories()
         .then(function (result) {
+            context.pageIsBusy = false;
             console.log('categories');
             console.log(JSON.stringify(result));
 
             view.page.showModal(categoriesPage, result, function (selected) {
                 console.log('selected a category: %s', selected);
-                pageData.category = selected;
+                quizData.category = selected;
             });
         });
 }
 
-function onItemTap(args) {
-    var itemIndex = args.index;
-    console.log('index: %s', itemIndex);
-
-    //navigation.goToSolveQuiz(quiz);
+// =============== HELPERS ===================================
+function loadCategories() {
+    return new Promise(function (resolve, reject) {
+        if (__categories.length) {
+            resolve(__categories);
+        } else {
+            webApi.getCategories()
+                .then(function (result) {
+                    __categories = result;
+                });
+        }
+    });
 }
+// ===========================================================

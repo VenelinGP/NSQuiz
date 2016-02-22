@@ -5,7 +5,7 @@
                 backgroundColor="#259"
                 borderRadius="15">
         <ListPicker id="quiz-categories" row="0"/>
-        <Button text="Ready" tap="onReadyTap" row="1" />
+        <Button text="Ready" tap="onReadyTap" row="1" cssClass="btn btn-main" />
     </GridLayout>
 
 </Page>
