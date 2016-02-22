@@ -152,23 +152,25 @@ function getById(id) {
             .catch(function (error) {
                 errorHandler.logError(error);
                 reject(error);
-            })
-    })
+            });
+    });
 }
 
 function getTotalQuizzesCount() {
-    http.request({
-        url: BASE_URL + '/api/quizzes/count',
-        method: 'GET'
-    })
-        .then(function (response) {
-            var content = processResponse(response);
-            resolve(content);
+    return new Promise(function (resolve, reject) {
+        http.request({
+            url: BASE_URL + '/api/quizzes/count',
+            method: 'GET'
         })
-        .catch(function (error) {
-            errorHandler.logError(error);
-            reject(error);
-        });
+            .then(function (response) {
+                var content = processResponse(response);
+                resolve(content);
+            })
+            .catch(function (error) {
+                errorHandler.logError(error);
+                reject(error);
+            });
+    });
 }
 
 // ======================================================
