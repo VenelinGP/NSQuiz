@@ -145,7 +145,6 @@ function getTotalQuizzesCount() {
     })
         .then(function (response) {
             var content = processResponse(response);
-
             resolve(content);
         })
         .catch(function (error) {

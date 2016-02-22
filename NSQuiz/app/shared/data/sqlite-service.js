@@ -2,8 +2,10 @@
  var Sqlite = require("nativescript-sqlite");
 
 var quizDb = {
-	initializeSQLite: initializeSQLite
-}
+	initializeSQLite: initializeSQLite,
+	getCountQuizzes: getCountQuizzes,
+	setQuizzes: setQuizzes
+};
 
 module.exports = quizDb;
 
@@ -18,19 +20,42 @@ function initializeSQLite() {
       		console.log("Are we open yet (Inside Callback)? ", db.isOpen() ? "Yes" : "No"); // Yes 
       		global.db = db;
     	}
-
     	global.db.execSQL("CREATE TABLE `quizzes` (`quizId` INTEGER NOT NULL PRIMARY KEY, `title` TEXT NOT NULL, `category` TEXT NOT NULL, `createdBy` TEXT NOT NULL, `createdOn` TEXT NOT NULL, `avatarUrl` TEXT);"); 
     	console.log("Table created..."); 
 	});
+}
 
+function getCountQuizzes() {
+	return new Sqlite("nsQuiz.sqlite", function(err, db) {
+		if (err) { 
+     		console.error("We failed to open database", err);
+    	} 
+    	else { 
+      		// This should ALWAYS be true, db object is open in the "Callback" if no errors occurred 
+      		console.log("Are we open yet (Inside Callback)? ", db.isOpen() ? "Yes" : "No"); // Yes 
+    	}
+		global.db.each('select * from quizzes where quizId >= ? and quizId <= ?', [1, 100],
+			function(err, row) {
+  				console.log("Row results it:", row);
+			})
+			.then(function (count) {
+ 				 return this.count; // Prints 100  (Assuming their are a 100 rows found) 
+				});
+	});
+}
 
-
-
- //   db_promise.then(function(db) {
- //    // This should ALWAYS be true, db object is open in the "then" 
- //      console.log("Are we open yet (Inside Promise)? ", db.isOpen() ? "Yes" : "No"); // Yes 
- //      db.close();
- //   }, function(err) {
- //     console.error("We failed to open database", err);
- //   });
-};
+function setQuizzes() {
+	return new Sqlite("nsQuiz.sqlite", function(err, db) {
+		if (err) { 
+     		console.error("We failed to open database", err);
+    	} 
+    	else { 
+      		// This should ALWAYS be true, db object is open in the "Callback" if no errors occurred 
+      		console.log("Are we open yet (Inside Callback)? ", db.isOpen() ? "Yes" : "No"); // Yes 
+    	}
+		global.db.execSQL("insert into quizzes (quizId, title, category, createdBy, createdOn ) values (?, ?, ?, ?, ?)", [1, "Terminator", "movies", "Some", "Today"],
+			function(err, id) {
+  				console.log("The new record id is:", id);
+			});
+	});
+}
