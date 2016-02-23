@@ -43,7 +43,7 @@ function Question() {
 
     questionModel.canSubmit = function() {
         var hasMinimumAnswers = answers.length > 1;
-        if (hasMinimumAnswers) {
+        if (hasMinimumAnswers && questionModel.title) {
             // has a correct anser
             return answers.some(function (answer) {
                 return answer.isCorrect;
@@ -51,6 +51,15 @@ function Question() {
         }
 
         return false;
+    };
+
+    questionModel.clearData =function() {
+        while (answers.length) {
+            answers.pop();
+        }
+
+        questionModel.title = "";
+        alternative.category = "";
     };
 
     return questionModel;

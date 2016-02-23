@@ -1,28 +1,55 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="registerView" >
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:lv="nativescript-telerik-ui/listview"
+      shownModally="onShownModally" backgroundColor="#333333">
     <Page.actionBar>
-        <ActionBar title="Question Details" />
+        <ActionBar title="Question Details"/>
     </Page.actionBar>
 
-        <StackLayout>
-            <TextField text="{{ title }}" id="title"
-                       horizontalAlignment="stretch" textAlignment="center"
-                       hint="Question Title" />
-            <TextView text="{{ alternative }}" id="title"
-                       horizontalAlignment="stretch" textAlignment="center"
-                       hint="Explanation shown when the question is answered incorrectly" />
+    <StackLayout padding="8">
+        <TextField text="{{ title }}" id="title"
+                   horizontalAlignment="stretch" textAlignment="center"
+                   height="40"
+                   hint="Question Title" margin="0" marginBottom="4"/>
+        <TextView text="{{ alternative }}" id="title"
+                  horizontalAlignment="stretch" textAlignment="center"
+                  margin="0" marginBottom="8" height="80"
+                  hint="Explanation - shown when the question is answered incorrectly"/>
 
-            <Button  text="Add Answer" tap="addAnswer" />
+        <lv:RadListView items="{{ answers }}" height="65%"
+                        swipeCells="true"
+                        cellReorder="true">
+            <lv:RadListView.listViewLayout>
+                <!--Animations: Default, Fade, Scale, Slide-->
+                <lv:ListViewLinearLayout scrollDirection="Vertical"
+                                         itemInsertAnimation="Slide"
+                                         itemDeleteAnimation="Slide"/>
+            </lv:RadListView.listViewLayout>
 
-            <ListView items="{{ answers }}" id="answers-container">
-                <ListView.itemTemplate>
-                    <GridLayout columns="20, 1*, 50" backgroundColor="#fff">
-                        <Label text="Cor" col="0" />
-                        <TextField text="{{ text }}" id="title"
-                                   horizontalAlignment="stretch" textAlignment="center"
-                                   hint="Question Title"  col="1" />
-                        <Button text="Remove" col="2" tap="removeAnswer" />
-                    </GridLayout>
-                </ListView.itemTemplate>
-            </ListView>
+            <lv:RadListView.itemTemplate>
+                <DockLayout backgroundColor="#BBBBBB" padding="2" margin="2" width="100%">
+                    <Button cssClass="btn check-box" verticalAlignment="center"
+                            dock="left" width="44" margin="0" backgroundColor="#fff" />
+                    <TextView text="{{ text }}" id="title" dock="left"
+                               horizontalAlignment="stretch" textAlignment="center"
+                               hint="Answer" margin="4" />
+                </DockLayout>
+            </lv:RadListView.itemTemplate>
+
+            <lv:RadListView.itemSwipeTemplate>
+                <DockLayout margin="2" padding="2" width="100%" stretchLastChild="false">
+                    <Button cssClass="btn btn-remove" margin="0" verticalAlignment="center"
+                            dock="right" width="44"/>
+                </DockLayout>
+
+            </lv:RadListView.itemSwipeTemplate>
+
+        </lv:RadListView>
+
+        <StackLayout orientation="horizontal" height="120">
+            <Button width="32%" text="Ready" tap="onReady" margin="4" horizontalAlignment="left"/>
+            <Button width="32%" text="Add Answer" tap="addAnswer" margin="4" horizontalAlignment="center"/>
+            <Button width="32%" text="Clear" tap="onClear" margin="4" horizontalAlignment="right"/>
         </StackLayout>
+
+    </StackLayout>
 </Page>

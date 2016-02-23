@@ -1,9 +1,9 @@
 @import { url('~/styles/platform.css') };
 
 page {
-	background-color: #25575E;
+	background-color: #29729c;
 	color: #FA0;
-	font-size: 17;
+	font-size: 18;
 }
 
 label {
@@ -22,19 +22,20 @@ button {
 }
 
 action-bar {
-	color: #FA0;
+	color: #fff;
 }
 
 action-bar, .main-color {
-	background-color: #25575E;
+	background-color: #11fa06;
 }
 
 
-text-field {
+text-field, text-view {
 	margin: 10;
 	padding: 10;
 	color: #FA0;
 	background-color: white;
+	border-radius: 4;
 }
 
 image {
@@ -96,8 +97,45 @@ image {
 	font-size: 16
 }
 
+<<<<<<< HEAD
 #questionTitle {
 	padding-left: 15;
 	font-size: 14;
 	color: white
+=======
+.btn {
+	margin: 4;
+	border-radius: 8;
+}
+
+.btn-main {
+	color: #034793;
+	background-color: #11fa06;
+}
+
+.btn-remove {
+	background-image: url("res://remove");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.btn-checkbox {
+	background-image: url("res://checkmark");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.btn-checkbox-checked {
+	background-image: url("res://checkmark_checked");
+}
+
+.form-label {
+	margin: 0;
+	padding: 0;
+	color: #fff;
+}
+
+.indicator-btn {
+	color: #034793;
+>>>>>>> 57aa3aa3453f0840bf912a89c02cb747d9563b86
 }

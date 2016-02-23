@@ -1,0 +1,9 @@
+<GridLayout rows="28, 1*" columns="1*, 24" cssClass="btn-interactive"
+            id="btn-indicator-root">
+    <Button text="{{ text }}" id="the-btn"
+            cssClass="btn btn-main" tap="{{ command }}"
+            isEnabled="{{ !isBusy }}"
+            rowSpan="2" colSpan="2" />
+    <activity-indicator cssClass="indicator indicator-btn"
+                        busy="{{ isBusy }}" row="0" col="1" marginRight="2" marginTop="2" />
+</GridLayout>

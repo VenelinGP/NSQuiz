@@ -1,10 +1,10 @@
 <GridLayout xmlns="http://schemas.nativescript.org/tns.xsd"
             cssClass="drawerContent" loaded="pageLoaded"
             columns="auto"
-            rows="2.5*, 5*, 1*, 20*">
+            rows="40, 5*, 1*, 20*">
 
     <StackLayout row="0" cssClass="menu" orientation="horizontal"  padding="4">
-        <Label text="Menu" fontSize="24" marginRight="186" verticalAlignment="center"/>
+        <Label text="Menu" fontSize="24" margin="0" marginRight="182" verticalAlignment="center" marginBottom="4" />
         <Button width="50" height="100" margin="0" id="close-button" tap="toggleSideDrawer" />
     </StackLayout>
 
