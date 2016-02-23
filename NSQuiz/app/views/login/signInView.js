@@ -21,7 +21,7 @@ module.exports = viewObject;
 function registerView(args) {
     var page = args.object;
     page.bindingContext = user;
-    user.set("username", "proba");
+    user.set("username", "NewUser");
     user.set("password", "123123123");
 
     formUtil.form.username = page.getViewById("username");

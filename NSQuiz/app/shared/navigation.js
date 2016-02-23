@@ -65,8 +65,7 @@ module.exports = {
 	signOut: function() {
 		config.invalidateToken();
 		frameModule.topmost().navigate({
-			moduleName: "views/login/login",
-			animated: false,
+			moduleName: "views/login/signInView",
 			clearHistory: true
 		});
 	},

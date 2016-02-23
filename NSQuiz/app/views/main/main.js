@@ -37,8 +37,5 @@ function setupPageLayout(navContext) {
     if (navContext && navContext.partial) {
         mainContentPlaceholder.removeChildren();
         mainContentPlaceholder.addChild(navContext.partial);
-    } else {
-        navigation.goToCreateQuiz();
     }
 }
-
