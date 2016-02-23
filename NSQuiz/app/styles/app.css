@@ -99,7 +99,6 @@ image {
 
 .btn {
 	margin: 4;
-	padding: 4;
 	border-radius: 8;
 }
 
@@ -108,8 +107,28 @@ image {
 	background-color: #11fa06;
 }
 
+.btn-remove {
+	background-image: url("res://remove");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.btn-checkbox {
+	background-image: url("res://checkmark");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.btn-checkbox-checked {
+	background-image: url("res://checkmark_checked");
+}
+
 .form-label {
 	margin: 0;
 	padding: 0;
 	color: #fff;
+}
+
+.indicator-btn {
+	color: #034793;
 }

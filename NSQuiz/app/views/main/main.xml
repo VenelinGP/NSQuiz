@@ -2,7 +2,7 @@
       xmlns:drawer="nativescript-telerik-ui/sidedrawer"
       xmlns="http://www.nativescript.org/tns.xsd"
       xmlns:sideContent="views/side-content">
-  <ActionBar title="NS Quiz">
+  <ActionBar title="{{ page.title, page.title || 'NS Quiz' }}">
     <NavigationButton
             text="Menu"
             android.systemIcon="ic_menu_moreoverflow_normal_holo_light"
