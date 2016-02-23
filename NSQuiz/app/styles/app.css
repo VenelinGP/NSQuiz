@@ -97,12 +97,12 @@ image {
 	font-size: 16
 }
 
-<<<<<<< HEAD
 #questionTitle {
 	padding-left: 15;
 	font-size: 14;
-	color: white
-=======
+	color: white;
+}
+
 .btn {
 	margin: 4;
 	border-radius: 8;
@@ -137,5 +137,4 @@ image {
 
 .indicator-btn {
 	color: #034793;
->>>>>>> 57aa3aa3453f0840bf912a89c02cb747d9563b86
 }
