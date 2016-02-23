@@ -16,7 +16,8 @@ var webApiObject = {
     getCategories: getCategories,
     getQuizzes: getQuizzes,
     getById: getById,
-    getTotalQuizzesCount: getTotalQuizzesCount
+    getTotalQuizzesCount: getTotalQuizzesCount,
+    submitNewQuiz: submitNewQuiz
 };
 
 module.exports = webApiObject;
@@ -164,6 +165,25 @@ function getTotalQuizzesCount() {
         })
             .then(function (response) {
                 var content = processResponse(response);
+                resolve(content);
+            })
+            .catch(function (error) {
+                errorHandler.logError(error);
+                reject(error);
+            });
+    });
+}
+
+function submitNewQuiz(quiz) {
+    return new Promise(function (resolve, reject) {
+        http.request({
+            url: BASE_URL + 'api/quizzes',
+            method: 'POST',
+            headers: applyAuthorisationHeader(),
+            content: quiz
+        })
+            .then(function (response) {
+            var content = processResponse(response);
                 resolve(content);
             })
             .catch(function (error) {
