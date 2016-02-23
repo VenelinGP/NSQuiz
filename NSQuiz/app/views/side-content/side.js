@@ -7,7 +7,7 @@ var viewObject = {
     goToList: navigation.goToQuizListPage,
     goToCreate: navigation.goToCreateQuiz,
     signOut: navigation.signOut,
-    goToProfilePage: goToProfilePage,
+    goToProfilePage: navigation.goToProfilePage,
     toggleSideDrawer: navigation.toggleDrawer
 };
 

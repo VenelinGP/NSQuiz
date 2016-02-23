@@ -4,7 +4,7 @@
         loaded="pageLoaded">
 
     <ScrollView>
-        <GridLayout rows="auto, auto, auto, auto, auto, auto, auto"
+        <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto"
                     columns="auto, 1*" padding="8" margin="0">
 
             <Image width="200" row="0" col="0"
@@ -39,9 +39,6 @@
                                      isBusy="{{ demo.busy}}"
                                      command="{{ demo.run }}"
                                      row="7" col="0"/>
-
-            <Button text="Add Question" tap="addQuestion" cssClass="btn btn-main"
-                    row="2" col="2"/>
         </GridLayout>
     </ScrollView>
 </StackLayout>

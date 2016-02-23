@@ -6,12 +6,12 @@ var appConfig = require('~/shared/config');
 var demo = {
     text: "DEMO",
     isBusy: false,
-    run: function() {
+    run: function () {
         var self = this;
         self.text = 'running';
         self.isBusy = true;
 
-        setTimeout(function(){
+        setTimeout(function () {
             self.text = 'DEMO';
             self.isBusy = false;
         }, 5000)
@@ -35,12 +35,9 @@ function pageLoaded(args) {
     view = args.object;
     view.bindingContext = context;
 
-    appConfig.currentUserInfo()
-        .then(function(user) {
+    appConfig.getUser()
+        .then(function (user) {
             context.set('user', user);
         });
-
-    // loads categories in the background
-    loadCategories();
 }
 
