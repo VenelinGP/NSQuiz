@@ -1,7 +1,5 @@
 "use strict";
-var dialogsModule = require("ui/dialogs");
 var Observable = require("data/observable").Observable;
-var ObservableArray = require("data/observable-array").ObservableArray;
 var navigation = require("../../../shared/navigation");
 var quizDb = require("../../../shared/data/sqlite-service");
 var webApi = require('../../../shared/data/web-api-service');
@@ -39,8 +37,6 @@ exports.loaded = function (args) {
                                 });
                             });
                     }
-
-
                 }); 
 
     quizzesList.empty();

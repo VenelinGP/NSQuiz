@@ -242,9 +242,9 @@ function processResponse(response) {
 
 function printResponse(response) {
     console.log('==================== HTTP RESPONSE ====================');
-    // console.log('Http Success: status: %s, content: %s',
-    //     response.statusCode,
-    //     response.content.toString());
+    console.log('Http Success: status: %s, content: %s',
+        response.statusCode,
+        response.content.toString());
     console.log('=======================================================');
 }
 
