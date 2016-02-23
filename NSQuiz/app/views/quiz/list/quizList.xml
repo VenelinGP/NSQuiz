@@ -1,6 +1,6 @@
 <StackLayout loaded="loaded" xmlns="http://schemas.nativescript.org/tns.xsd">
     <!--         <Button text="GET" tap="getRequest" /> -->
-    <ListView items="{{ quizzesList }}" itemLoading="onItemLoading" itemTap="onItemTap">
+    <ListView items="{{ quizzesList }}" id="quizList" itemLoading="onItemLoading" itemTap="onItemTap">
         <ListView.itemTemplate>
             <!--2 row 4 columns-->
             <GridLayout columns="auto, 1*, auto, 1*" rows="auto, auto" style.backgroundColor="lightgray"
@@ -18,8 +18,6 @@
                 <Label text="{{ createdBy }}" id="createdBy" row="1" col="3" class="content"/>
             </GridLayout>
 
-
         </ListView.itemTemplate>
     </ListView>
-
 </StackLayout>

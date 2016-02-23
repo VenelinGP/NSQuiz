@@ -1,11 +1,9 @@
 "use strict";
-var dialogsModule = require("ui/dialogs");
 var Observable = require("data/observable").Observable;
 
 var navigation = require("../../../shared/navigation");
 var QuizzesListViewModel = require("../../../shared/view-models/quizzes-list-view-model");
 var quizDb = require("../../../shared/data/sqlite-service");
-var webApi = require("../../../shared/data/web-api-service");
 
 var countQuizzesFromDB;
 var countQuizzesFromWeb;

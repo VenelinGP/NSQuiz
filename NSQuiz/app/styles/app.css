@@ -1,4 +1,4 @@
-﻿@import { url('~/styles/platform.css') };
+@import { url('~/styles/platform.css') };
 
 page {
 	background-color: #25575E;
@@ -94,4 +94,10 @@ image {
 
 .content{
 	font-size: 16
+}
+
+#questionTitle {
+	padding-left: 15;
+	font-size: 14;
+	color: white
 }

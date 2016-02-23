@@ -1,1 +1,17 @@
-<Label text="sss" textWrap="true" loaded="pageLoaded" />
+
+<StackLayout loaded="pageLoaded" id="quizList1" xmlns="http://schemas.nativescript.org/tns.xsd">
+	<Label text="{{ title }}" id="title" textWrap="true" />
+	<Label text="{{ description }}" id="description" textWrap="true" />
+<!-- 	<Label text="{{ createdOn | dateConverter(dateFormat) }}" id="createdOn" textWrap="true" /> -->
+
+<ListView items="{{ questions }}" loaded="onLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
+	<ListView.itemTemplate>
+		<StackLayout orientation="horizontal">
+			<Label text="" textWrap="true" />
+			<Label text="{{title}}" id="questionTitle" textWrap="true" />
+		</StackLayout>
+		
+		
+	</ListView.itemTemplate>
+</ListView>
+</StackLayout>

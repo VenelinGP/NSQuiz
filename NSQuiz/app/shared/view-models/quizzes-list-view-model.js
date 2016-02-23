@@ -1,4 +1,4 @@
-var config = require("../../shared/config");
+"use strict";
 var webApi = require("../../shared/data/web-api-service");
 var ObservableArray = require("data/observable-array").ObservableArray;
 
