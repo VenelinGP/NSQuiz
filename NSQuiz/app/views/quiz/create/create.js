@@ -13,14 +13,17 @@ var quizData = new CreateQuizModel();
 
 var context = new Observable({
     pageIsBusy: false,
+    selectCategoryCommand: selectCategory,
     quizData: quizData
 });
 
 var pageObject = {
     pageLoaded: pageLoaded,
     addQuestion: addQuestion,
+    editQuestion: editQuestion,
     resetQuiz: resetQuiz,
-    selectCategory: selectCategory
+    selectCategory: selectCategory,
+    submitQuiz: submitQuiz
 };
 
 module.exports = pageObject;
@@ -34,9 +37,17 @@ function pageLoaded(args) {
 }
 
 function addQuestion() {
-    console.log('total questions: %d', pageData.questions.length);
-    var question = pageData.newQuestion();
-    navigation.goToEditQuestion(question);
+    console.log('total questions: %d', quizData.questions.length);
+    var question = quizData.newQuestion();
+    var createQuestionPage = 'views/quiz/create/edit-question/edit-question';
+
+    question.title = 'Nov Question';
+    console.log(question.title);
+
+    view.page.showModal(createQuestionPage, question, function(xa) {}, true);
+
+    // old navigation
+    //navigation.goToEditQuestion(question);
 }
 
 function editQuestion(args) {
@@ -48,7 +59,7 @@ function resetQuiz() {
         .confirm('Are you sure you want to reset the quiz? All Questions will be deleted!')
         .then(function (result) {
             if (result) {
-                pageData.clearData();
+                quizData.clearData();
             }
         });
 }
@@ -68,6 +79,28 @@ function selectCategory() {
                 quizData.category = selected;
             });
         });
+}
+
+function submitQuiz() {
+    if (quizData.canSubmit()) {
+        context.pageIsBusy = true;
+        webApi.submitQuiz(quizData)
+            .then(function () {
+                dialogsModule
+                    .confirm('Everything went well, congratulations on the new quiz');
+                resetQuiz();
+            })
+            .catch(function() {
+                dialogsModule
+                    .confirm('Oh, snap something went wrong, at least your quiz is still here');
+            })
+            .then(function() {
+                context.pageIsBusy = false;
+            })
+    } else {
+        dialogsModule
+            .alert('The quiz is not ready for submit, check if you have at least 3 questions');
+    }
 }
 
 // =============== HELPERS ===================================

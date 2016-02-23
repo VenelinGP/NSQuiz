@@ -1,38 +1,42 @@
-<StackLayout loaded="pageLoaded" xmlns="http://schemas.nativescript.org/tns.xsd">
+<StackLayout
+        xmlns="http://schemas.nativescript.org/tns.xsd"
+        xmlns:app="shared/ui/buttonWithIndicator"
+        loaded="pageLoaded">
 
-    <GridLayout rows="48, 96, 2*, 2*, 2*, 2*" columns="auto, 1*" padding="4">
-        <TextField id="quizTitle" text="{{ quizData.title }}" margin="4"
+    <GridLayout rows="48, 96, 1*, 1*, 3*, 1*" columns="1*, 4, 1*" padding="8" margin="0">
+        <TextField id="quizTitle" text="{{ quizData.title }}" margin="0" marginBottom="4"
                    hint="Title" returnKeyType="next"
-                   row="0" col="0" colSpan="2"/>
-        <TextView id="description" text="{{ quizData.description }}" margin="4"
-                   hint="Description" returnKeyType="next"
-                   row="1" col="0" colSpan="2" />
+                   row="0" col="0" colSpan="3"/>
+        <TextView id="description" text="{{ quizData.description }}" margin="0"
+                  hint="Description" returnKeyType="next"
+                  row="1" col="0" colSpan="3"/>
 
-        <Label text="Category" cssClass="form-label" textAlignment="right"
-                row="2" col="0" backgroundColor="#aaa" />
+        <app:ButtonWithIndicator id="greetingsComponent"
+                                 text="{{ quizData.category, quizData.category || 'Select a Category' }}"
+                                 isBusy="{{ pageIsBusy || true }}"
+                                 command="{{ selectCategoryCommand }}"
+                                 row="2" col="0"/>
 
-        <activity-indicator busy="{{ pageIsBusy }}" row="2" col="0" colSpan="2" rowSpan="2" />
-        <Button text="{{ quizData.category || 'Select Category' }}" cssClass="btn btn-main" tap="selectCategory"
-                row="2" col="1" isEnabled="{{ !pageIsBusy }}"/>
+        <Button text="Add Question" tap="addQuestion" cssClass="btn btn-main"
+                row="2" col="2"/>
 
-        <Button text="Add Question" id="addQuestion" tap="addQuestion" cssClass="btn btn-main" row="3" />
+        <ListView items="{{ quizData.questions }}" id="questions container" row="3" colSpan="3"
+                  onlongpress="editQuestion">
+            <ListView.itemTemplate>
+                <GridLayout rows="auto, auto" columns="auto, 10*, 2*, 2*" backgroundColor="#fff">
+                    <Label text="{{ title }}" id="title" row="0" col="0" colSpan="4" textAlignment="center"/>
+                    <Label text="Answers" row="1" col="0" verticalAlignment="center"/>
+                    <label text="{{ answers.length }}" row="1" col="1" verticalAlignment="center"/>
+                    <Button text="Edit" row="1" col="2" verticalAlignment="center"/>
+                    <Button cssClass="btn btn-remove" row="1" col="3" verticalAlignment="center"/>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
 
-        <!--<ListView items="{{ questions }}" id="questions container" row="4">-->
-            <!--<ListView.itemTemplate>-->
-                <!--<GridLayout rows="auto, auto" columns="auto, 10*, 2*, 2*" backgroundColor="#fff">-->
-                    <!--<Label text="{{ title }}" id="title" row="0" col="0" colSpan="4" textAlignment="center" />-->
-                    <!--<Label text="Answers" row="1" col="0" verticalAlignment="center" />-->
-                    <!--<label text="{{ answers.length }}" row="1" col="1" verticalAlignment="center" />-->
-                    <!--<Button text="Edit" row="1" col="2" verticalAlignment="center" />-->
-                    <!--<Button text="Delete" row="1" col="3" verticalAlignment="center" />-->
-                <!--</GridLayout>-->
-            <!--</ListView.itemTemplate>-->
-        <!--</ListView>-->
-
-        <!--<StackLayout row="5" orientation="horizontal">-->
-            <!--<Button  text="Reset" id="resetButton" tap="resetQuiz" width="49%" />-->
-            <!--<Button  text="Create" id="createButton" tap="createQuiz" width="49%" isEnabled = "{{ canSubmit() }}" />-->
-        <!--</StackLayout>-->
+        <Button text="Reset" id="resetButton" tap="resetQuiz"
+                row="5" col="0" cssClass="btn btn-main"/>
+        <Button text="Create" id="createButton" tap="createQuiz"
+                row="5" col="2" cssClass="btn btn-main" isEnabled="{{ canSubmit() }}"/>
 
     </GridLayout>
 </StackLayout>

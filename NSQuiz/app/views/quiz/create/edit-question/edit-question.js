@@ -4,29 +4,59 @@ var Question = require('../models/question-view-model');
 var dialogsModule = require("ui/dialogs");
 
 var page;
+var question;
+var closeCallback;
 
 var pageObject = {
-    pageLoaded: pageLoaded,
-    onNavigatedTo: onNavigatedTo
+    onShownModally: onShownModally,
+    addAnswer: addAnswer,
+    removeAnswer: removeAnswer,
+    onReady: onReady,
+    onClear: onClear
 };
 
 module.exports = pageObject;
 
-function pageLoaded(args) {
+function onShownModally(args) {
     page = args.object;
-    setBindings();
+    question = args.context;
+    closeCallback = args.closeCallback;
+
+    console.log('Edit question');
+
+    if (!question) {
+        question = new Question();
+    }
+
+    page.bindingContext = question;
 }
 
-function onNavigatedTo(args) {
-    console.log('navigated to question details');
+function addAnswer() {
+    question.newAnswer();
 }
 
-function setBindings() {
-    if (page.navigationContext) {
-        page.bindingContext = page.navigationContext;
+function removeAnswer(args) {
+
+}
+
+function onReady() {
+    if (!question.canSubmit()) {
+        dialogsModule.alert('The question is not ready, check:' +
+        ' that you have selected at least 2 answers, ' +
+        ' that you have selected a correct answer, ' +
+        ' the question has text.')
     } else {
-        page.bindingContext = new Question();
+        closeCallback();
+        //page.closeModal();
     }
 }
 
-
+function onClear() {
+    dialogsModule
+        .confirm('Are you sure you want to reset the question?')
+        .then(function (result) {
+            if (result) {
+                question.clearData();
+            }
+        });
+}

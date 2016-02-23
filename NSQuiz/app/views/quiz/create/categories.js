@@ -1,5 +1,5 @@
 'use strict';
-var page;
+var view;
 var context;
 var listPicker;
 var closeCallback;
@@ -14,9 +14,9 @@ module.exports = pageObject;
 function onShownModally(args) {
     console.log('showing modally');
 
-    page = args.object;
+    view = args.object;
     context = args.context;
-    listPicker = page.getViewById('quiz-categories');
+    listPicker = view.getViewById('quiz-categories');
     listPicker.items = context;
 
     closeCallback = args.closeCallback;
