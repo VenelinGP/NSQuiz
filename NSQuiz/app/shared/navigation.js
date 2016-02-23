@@ -54,6 +54,14 @@ module.exports = {
 			context: question
 		});
 	},
+	goToProfilePage: function() {
+		var profile = builder.load({
+			path: "views/profile",
+			name: "profile"
+		});
+
+		navigate(profile);
+	},
 	signOut: function() {
 		config.invalidateToken();
 		frameModule.topmost().navigate({

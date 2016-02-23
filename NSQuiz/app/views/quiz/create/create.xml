@@ -13,7 +13,7 @@
 
         <app:ButtonWithIndicator id="greetingsComponent"
                                  text="{{ quizData.category, quizData.category || 'Select a Category' }}"
-                                 isBusy="{{ pageIsBusy || true }}"
+                                 isBusy="{{ pageIsBusy }}"
                                  command="{{ selectCategoryCommand }}"
                                  row="2" col="0"/>
 

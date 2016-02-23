@@ -1,0 +1,47 @@
+<StackLayout
+        xmlns="http://schemas.nativescript.org/tns.xsd"
+        xmlns:app="shared/ui/buttonWithIndicator"
+        loaded="pageLoaded">
+
+    <ScrollView>
+        <GridLayout rows="auto, auto, auto, auto, auto, auto, auto"
+                    columns="auto, 1*" padding="8" margin="0">
+
+            <Image width="200" row="0" col="0"
+                   src="http://i.stack.imgur.com/YqDV2.png" stretch="aspectFit" colSpan="2"
+                   horizontalAlignment="center"/>
+
+            <Label text="Username" cssClass="form-label" row="1" col="1"/>
+            <Label text="{{ user.username }}" cssClass="form-label" row="1" col="1"/>
+
+            <Label text="Registered On" cssClass="form-label" row="2" col="0"/>
+            <Label text="{{ user.registeredOn }}" cssClass="form-label" row="2" col="1"/>
+
+            <Label text="First Name" cssClass="form-label" row="3" col="0"/>
+            <TextView id="firstName" text="{{ user.firstName }}" margin="0"
+                      hint="First Name" returnKeyType="next"
+                      row="3" col="1"/>
+
+            <Label text="Last Name" cssClass="form-label" row="4" col="0"/>
+            <TextView id="lastName" text="{{ user.lastName }}" margin="0"
+                      hint="Last Name" returnKeyType="next"
+                      row="4" col="1"/>
+
+            <Label text="Quizzes Created" cssClass="form-label" row="5" col="0"/>
+            <Label text="{{ user.quizzesCreated }}" cssClass="form-label" row="5" col="1"/>
+
+            <Label text="Quizzes Taken" cssClass="form-label" row="6" col="0"/>
+            <Label text="{{ user.quizzesTaken }}" cssClass="form-label" row="6" col="1"/>
+
+
+            <app:ButtonWithIndicator id="greetingsComponent"
+                                     text="{{ demo.text }}"
+                                     isBusy="{{ demo.busy}}"
+                                     command="{{ demo.run }}"
+                                     row="7" col="0"/>
+
+            <Button text="Add Question" tap="addQuestion" cssClass="btn btn-main"
+                    row="2" col="2"/>
+        </GridLayout>
+    </ScrollView>
+</StackLayout>

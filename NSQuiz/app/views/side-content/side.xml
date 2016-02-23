@@ -19,6 +19,7 @@
         <Label id="sidebarHeader"
                text="Hello"
                width="60%"
+               tap="goToProfilePage"
                verticalAlignment="center" fontSize="28" />
     </StackLayout>
 
@@ -26,9 +27,8 @@
 
     <StackLayout cssClass="drawerMenuContent" row="3" col="0" width="70%" horizontalAlignment="left" padding="4">
         <Label text="View All Quizzes" tap="goToList"/>
-        <Label text="Solve todo"/>
         <Label text="Create" tap="goToCreate"/>
-        <Label text="My Profile todo"/>
-
+        <Label text="My Profile" tap="goToProfilePage"/>
+        <Label text="Sign Out" tap="signOut"/>
     </StackLayout>
 </GridLayout>

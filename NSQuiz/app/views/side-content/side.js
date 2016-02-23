@@ -2,6 +2,17 @@
 var navigation = require('../../shared/navigation');
 var appConfig = require('../../shared/config');
 
+var viewObject = {
+    pageLoaded: pageLoaded,
+    goToList: navigation.goToQuizListPage,
+    goToCreate: navigation.goToCreateQuiz,
+    signOut: navigation.signOut,
+    goToProfilePage: goToProfilePage,
+    toggleSideDrawer: navigation.toggleDrawer
+};
+
+module.exports = viewObject;
+
 function pageLoaded(args) {
     console.log("Page loaded");
     var page = args.object;
@@ -13,12 +24,3 @@ function pageLoaded(args) {
             header.text = user.username;
         });
 }
-
-var viewObject = {
-    pageLoaded: pageLoaded,
-    goToList: navigation.goToQuizListPage,
-    goToCreate: navigation.goToCreateQuiz,
-    toggleSideDrawer: navigation.toggleDrawer
-};
-
-module.exports = viewObject;
