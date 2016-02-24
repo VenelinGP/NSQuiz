@@ -44,7 +44,8 @@ function addQuestion() {
     question.title = 'Nov Question';
     console.log(question.title);
 
-    view.page.showModal(createQuestionPage, question, function (xa) {
+    view.page.showModal(createQuestionPage, question, function () {
+        // Todo: add onModalClose callback here
     }, true);
 
     // old navigation
