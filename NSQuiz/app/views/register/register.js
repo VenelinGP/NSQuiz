@@ -48,11 +48,6 @@ function register() {
             dialogsModule
                 .alert("Welcome " + user.username)
                 .then(navigation.goToQuizListPage)
-        }, function (error) {
-            throw {
-                error: "Auto Login Error",
-                message: "There was a problem logging you in automatically, try manually"
-            };
         })
         .catch(function (error) {
             errorHandler.handleRegistrationError(error);

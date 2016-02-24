@@ -11,7 +11,7 @@
                    src="http://i.stack.imgur.com/YqDV2.png" stretch="aspectFit" colSpan="2"
                    horizontalAlignment="center"/>
 
-            <Label text="Username" cssClass="form-label" row="1" col="1"/>
+            <Label text="Username" cssClass="form-label" row="1" col="0"/>
             <Label text="{{ user.username }}" cssClass="form-label" row="1" col="1"/>
 
             <Label text="Registered On" cssClass="form-label" row="2" col="0"/>

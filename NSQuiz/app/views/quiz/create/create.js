@@ -44,7 +44,8 @@ function addQuestion() {
     question.title = 'Nov Question';
     console.log(question.title);
 
-    view.page.showModal(createQuestionPage, question, function(xa) {}, true);
+    view.page.showModal(createQuestionPage, question, function (xa) {
+    }, true);
 
     // old navigation
     //navigation.goToEditQuestion(question);

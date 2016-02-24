@@ -3,7 +3,7 @@
         xmlns:app="shared/ui/buttonWithIndicator"
         loaded="pageLoaded">
 
-    <GridLayout rows="48, 96, 1*, 1*, 3*, 1*" columns="1*, 4, 1*" padding="8" margin="0">
+    <GridLayout rows="48, 96, 1*, 3*, 1*" columns="1*, 4, 1*" padding="8" margin="0">
         <TextField id="quizTitle" text="{{ quizData.title }}" margin="0" marginBottom="4"
                    hint="Title" returnKeyType="next"
                    row="0" col="0" colSpan="3"/>
